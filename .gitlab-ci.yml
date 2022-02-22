@@ -1,0 +1,9 @@
+default:
+  image: maven
+
+stages:
+  - build
+
+build-job:
+  stage: build
+  script: mvn test
