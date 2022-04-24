@@ -1,6 +1,10 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
 
+import ch.heia.isc.gl1.simulife.interface_.ICell;
+import ch.heia.isc.gl1.simulife.interface_.IElement;
+import ch.heia.isc.gl1.simulife.interface_.IUniverse;
+
 import java.util.ArrayList;
 
 /**
@@ -12,7 +16,7 @@ import java.util.ArrayList;
  * @brief Cell with elements
  */
 
-public class Cell {
+public class Cell implements ICell {
 
     private final int x;
     private final int y;
@@ -90,5 +94,25 @@ public class Cell {
      */
     public int size() {
         return this.elements.size();
+    }
+
+    @Override
+    public IUniverse getIUniverse() {
+        return null;
+    }
+
+    @Override
+    public IElement getTopElement() {
+        return null;
+    }
+
+    @Override
+    public IElement getElement(int i) throws ArrayIndexOutOfBoundsException {
+        return null;
+    }
+
+    @Override
+    public int getNumberOfElements() {
+        return 0;
     }
 }

@@ -6,7 +6,7 @@
 
   <groupId>ch.hefr.iscrsid.gl1.strmauroc</groupId>
   <artifactId>strmauroc</artifactId>
-  <version>1.0</version>
+  <version>2.0</version>
 
   <name>strmauroc</name>
   <!-- FIXME change it to the project's website -->
@@ -17,6 +17,13 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
+
+  <repositories>
+    <repository>
+      <id>gitlab-maven-interface</id>
+      <url>https://gitlab.forge.hefr.ch/api/v4/projects/11543/packages/maven</url>
+    </repository>
+  </repositories>
 
   <dependencies>
     <dependency>
@@ -33,6 +40,11 @@
       <groupId>org.jacoco</groupId>
       <artifactId>jacoco-maven-plugin</artifactId>
       <version>0.8.7</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.heia.isc.gl1.simulife</groupId>
+      <artifactId>simulife-interface</artifactId>
+      <version>1.1</version>
     </dependency>
   </dependencies>
 

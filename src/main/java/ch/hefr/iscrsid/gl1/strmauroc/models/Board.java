@@ -1,5 +1,8 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
+import ch.heia.isc.gl1.simulife.interface_.ICell;
+import ch.heia.isc.gl1.simulife.interface_.IUniverse;
+
 /**
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
  * @author Maumary Quentin <quentin.maumary@edu.hefr.ch>
@@ -9,7 +12,7 @@ package ch.hefr.iscrsid.gl1.strmauroc.models;
  * @brief 2D Array of cells
  */
 
-public class Board {
+public class Board implements IUniverse {
 
     private final Cell[][] cellBoard;
 
@@ -104,5 +107,21 @@ public class Board {
         s.append("--------------------------------------------\n");
         return s.toString();
     }
+
+    @Override
+    public int getWidth() {
+        return 0;
+    }
+
+    @Override
+    public int getHeight() {
+        return 0;
+    }
+
+    @Override
+    public ICell getICell(int i, int i1) throws ArrayIndexOutOfBoundsException {
+        return null;
+    }
+
 }
 

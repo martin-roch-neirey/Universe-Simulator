@@ -10,6 +10,8 @@ package ch.hefr.iscrsid.gl1.strmauroc.models;
  */
 
 
+// DEPRECATED
+//TODO delete this file
 public class Element {
 
     private final String type;
