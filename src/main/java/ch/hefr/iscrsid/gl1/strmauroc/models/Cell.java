@@ -103,6 +103,6 @@ public class Cell implements ICell {
 
     @Override
     public int getNumberOfElements() {
-        return 0;
+        return elements.size();
     }
 }
