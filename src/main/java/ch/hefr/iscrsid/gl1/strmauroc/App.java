@@ -22,7 +22,7 @@ public abstract class App {
         Element element = new Element("S");
         Element element2 = new Element("S");
         myBoard.getICell(0,0).addElement(element);
-        myBoard.getCell(1,1).addElement(element2);
+        myBoard.getICell(1,1).addElement(element2);
         System.out.println(myBoard);
         System.out.println();
         System.out.println("-----------------MOVE----------------");

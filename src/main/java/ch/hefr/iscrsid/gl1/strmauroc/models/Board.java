@@ -43,21 +43,6 @@ public class Board implements IUniverse {
 
     }
 
-
-    /**
-     * @param x x coord
-     * @param y y coord
-     * @return Cell if existing
-     * @throws NumberFormatException exception
-     * @brief Return Cell in specific x and y
-     */
-    public Cell getCell(int x, int y) throws ArrayIndexOutOfBoundsException {
-        if (x >= this.cellBoard.length || x < 0 || y >= this.cellBoard.length || y < 0) {
-            throw new ArrayIndexOutOfBoundsException("Illegal Args: x: " + x + " y: " + y);
-        }
-        return this.cellBoard[x][y];
-    }
-
     /**
      * @param element element to move
      * @param x x destination coord
@@ -71,7 +56,7 @@ public class Board implements IUniverse {
         }
 
         element.getCell().removeElement(element);
-        this.getCell(x,y).addElement(element);
+        this.getICell(x,y).addElement(element);
         element.setCell(this.cellBoard[x][y]);
     }
 
@@ -116,19 +101,36 @@ public class Board implements IUniverse {
         return s.toString();
     }
 
+    /**
+     * Returns width of the board
+     *
+     * @return The width.
+     */
     @Override
     public int getWidth() {
         return this.width;
     }
 
+    /**
+     * Returns height of the board
+     *
+     * @return The height.
+     */
     @Override
     public int getHeight() {
         return this.height;
     }
 
+    /**
+     * @param width width coord
+     * @param height height coord
+     * @return Cell if existing
+     * @throws NumberFormatException exception
+     * @brief Return Cell in specific x and y
+     */
     @Override
-    public Cell getICell(int i, int i1) throws ArrayIndexOutOfBoundsException {
-        return this.cellBoard[i][i1];
+    public Cell getICell(int width, int height) throws ArrayIndexOutOfBoundsException {
+        return this.cellBoard[width][height];
     }
 
 }
