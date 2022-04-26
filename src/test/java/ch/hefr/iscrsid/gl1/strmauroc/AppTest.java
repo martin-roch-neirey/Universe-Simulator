@@ -30,8 +30,8 @@ public class AppTest {
     @Test
     public void boardInstanceTest() {
         Board first;
-        first = new Board(10);
-        Board second = new Board(10);
+        first = new Board(10,10);
+        Board second = new Board(10,10);
         assertNotEquals(second, first);
     }
 
@@ -39,66 +39,105 @@ public class AppTest {
     @Test
     public void boardInstanceNegativeTest() {
         assertThrows(IllegalArgumentException.class, () ->
-                new Board(-1));
+                new Board(-1,-1));
+    }
+
+    @Test
+    public void boardInstanceWidthNegativeTest() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Board(-1,1));
+    }
+
+    @Test
+    public void boardInstanceHeightNegativeTest() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Board(1,-1));
     }
 
     @Test
     public void boardInstanceMinTest() {
         assertThrows(IllegalArgumentException.class, () ->
-                new Board(Integer.MIN_VALUE));
+                new Board(Integer.MIN_VALUE, Integer.MIN_VALUE));
+    }
+
+    @Test
+    public void boardInstanceWidthMinTest() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Board(Integer.MIN_VALUE, 1));
+    }
+
+    @Test
+    public void boardWidthHeightNotInvertedTest() {
+        Board test = new Board(10,10);
+        Element element = new Element("S");
+        test.getICell(2,4).addElement(element);
+        assertEquals(test.getICell(2,4).getNumberOfElements(), 1);
+        assertEquals(test.getICell(4,2).getNumberOfElements(), 0);
+    }
+
+    @Test
+    public void boardWidthHeightSeparateTest() {
+        Board test = new Board(10,20);
+        assertNotEquals(test.getWidth(), test.getHeight());
+    }
+
+    @Test
+    public void boardInstanceHeightMinTest() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new Board(1, Integer.MIN_VALUE));
     }
 
     @Test
     public void boardGetCellMaxTest() {
-        Board test = new Board(10);
+        Board test = new Board(10,10);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
                 test.getCell(Integer.MAX_VALUE, Integer.MAX_VALUE));
     }
 
     @Test
     public void boardGetCellMinTest() {
-        Board test = new Board(10);
+        Board test = new Board(10,10);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
                 test.getCell(Integer.MIN_VALUE, Integer.MIN_VALUE));
     }
 
     @Test
     public void boardGetCellXTest() {
-        Board test = new Board(10);
+        Board test = new Board(10,10);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
                 test.getCell(Integer.MIN_VALUE, 9));
     }
 
     @Test
     public void boardGetCellXMaxTest() {
-        Board test = new Board(10);
+        Board test = new Board(10,10);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
                 test.getCell(Integer.MAX_VALUE, 9));
     }
 
     @Test
     public void boardGetCellYTest() {
-        Board test = new Board(10);
+        Board test = new Board(10,10);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
                 test.getCell(9, Integer.MAX_VALUE));
     }
 
     @Test
     public void boardGetCellYMinTest() {
-        Board test = new Board(10);
+        Board test = new Board(10,10);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
                 test.getCell(9, Integer.MIN_VALUE));
     }
 
     @Test
     public void boardGetCellTest() {
-        Board test = new Board(10);
+        Board test = new Board(10,10);
         assertNotNull(test.getCell(9, 9));
     }
 
     @Test
     public void boardAddElementTest() {
-        Board myBoard = new Board(10);
+        Board myBoard = new Board(10,10);
         Element element = new Element("S");
         myBoard.getCell(0,0).addElement(element);
         assertEquals(myBoard.getCell(0, 0).size(), 1);
@@ -106,7 +145,7 @@ public class AppTest {
 
     @Test
     public void boardAddElementTest2() throws ArrayIndexOutOfBoundsException, ArrayStoreException {
-        Board myBoard = new Board(10);
+        Board myBoard = new Board(10,10);
         Element element = new Element("S");
         Element element2 = new Element("S");
         myBoard.getCell(0,0).addElement(element);
@@ -116,7 +155,7 @@ public class AppTest {
 
     @Test
     public void boardAddElementTest3() throws ArrayIndexOutOfBoundsException, ArrayStoreException {
-        Board myBoard = new Board(10);
+        Board myBoard = new Board(10,10);
         Element element = new Element("S");
         myBoard.getCell(0,0).addElement(element);
         assertThrows(ArrayStoreException.class, () ->
@@ -125,7 +164,7 @@ public class AppTest {
 
     @Test
     public void boardPrintTest() {
-        Board myBoard = new Board(10);
+        Board myBoard = new Board(10,10);
         Element element = new Element("S");
         Element element2 = new Element("S");
         myBoard.getCell(0,0).addElement(element);
@@ -137,7 +176,7 @@ public class AppTest {
 
     @Test
     public void boardMoveElementTest() {
-        Board myBoard = new Board(10);
+        Board myBoard = new Board(10,10);
         Element element = new Element("S");
         myBoard.getCell(0,0).addElement(element);
         assertEquals(myBoard.getCell(0, 0).size(), 1);
@@ -149,7 +188,7 @@ public class AppTest {
 
     @Test
     public void boardMoveElementMinTest() {
-        Board myBoard = new Board(10);
+        Board myBoard = new Board(10,10);
         Element element = new Element("S");
         myBoard.getCell(0,0).addElement(element);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
@@ -158,7 +197,7 @@ public class AppTest {
 
     @Test
     public void boardMoveElementMaxTest() {
-        Board myBoard = new Board(10);
+        Board myBoard = new Board(10,10);
         Element element = new Element("S");
         myBoard.getCell(0,0).addElement(element);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
@@ -167,7 +206,7 @@ public class AppTest {
 
     @Test
     public void boardMoveElementMaxXTest() {
-        Board myBoard = new Board(10);
+        Board myBoard = new Board(10,10);
         Element element = new Element("S");
         myBoard.getCell(0,0).addElement(element);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
@@ -176,7 +215,7 @@ public class AppTest {
 
     @Test
     public void boardMoveElementMaxYTest() {
-        Board myBoard = new Board(10);
+        Board myBoard = new Board(10,10);
         Element element = new Element("S");
         myBoard.getCell(0,0).addElement(element);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
@@ -185,7 +224,7 @@ public class AppTest {
 
     @Test
     public void boardMoveElementMinYTest() {
-        Board myBoard = new Board(10);
+        Board myBoard = new Board(10,10);
         Element element = new Element("S");
         myBoard.getCell(0,0).addElement(element);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
@@ -194,7 +233,7 @@ public class AppTest {
 
     @Test
     public void boardMoveElementMinXTest() {
-        Board myBoard = new Board(10);
+        Board myBoard = new Board(10,10);
         Element element = new Element("S");
         myBoard.getCell(0,0).addElement(element);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
@@ -203,7 +242,7 @@ public class AppTest {
 
     @Test
     public void boardRemoveElementTest() throws ArrayIndexOutOfBoundsException, ArrayStoreException {
-        Board myBoard = new Board(10);
+        Board myBoard = new Board(10,10);
         Element element = new Element("S");
         myBoard.getCell(0,0).addElement(element);
         assertEquals(myBoard.getCell(0, 0).size(), 1);
@@ -213,7 +252,7 @@ public class AppTest {
 
     @Test
     public void boardRemoveElementTest2() throws ArrayIndexOutOfBoundsException, ArrayStoreException, NullPointerException {
-        Board myBoard = new Board(10);
+        Board myBoard = new Board(10,10);
         Element element = new Element("S");
         myBoard.getCell(0,0).addElement(element);
         assertThrows(ArrayStoreException.class, () -> {
@@ -224,7 +263,7 @@ public class AppTest {
 
     @Test
     public void boardTest() {
-        Board myBoard = new Board(10);
+        Board myBoard = new Board(10,10);
         assertNotNull(myBoard);
     }
 
