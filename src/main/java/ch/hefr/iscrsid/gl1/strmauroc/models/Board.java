@@ -32,7 +32,7 @@ public class Board implements IUniverse {
 
         for (int y = 0; y < (size); y++) {
             for (int x = 0; x < (size); x++) {
-                Cell newCell = new Cell(x, y);
+                Cell newCell = new Cell(x, y, this);
                 this.cellBoard[x][y] = newCell;
             }
         }
