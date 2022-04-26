@@ -7,24 +7,26 @@ import ch.heia.isc.gl1.simulife.interface_.IUniverse;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
  * @author Maumary Quentin <quentin.maumary@edu.hefr.ch>
  * @author Roch-Neirey Martin <martin.roch-neirey@edu.hefr.ch>
  * @version 2.0
- * @date 05.04.2022
- * @brief Cell with elements
+ * @date 26.04.2022
+ * @brief It's a cell in a universe that can contain elements
  */
 
 public class Cell implements ICell {
-
     @Getter
     private final int x;
 
     @Getter
     private final int y;
-    private final ArrayList<Element> elements;
+    private final Stack<Element> elements;
+
+    private final IUniverse universe;
 
     /**
      * @param x x coord
@@ -32,13 +34,15 @@ public class Cell implements ICell {
      * @throws NumberFormatException exception
      * @brief Constructor of Cell with Exception handler
      */
-    public Cell(int x, int y) throws IllegalArgumentException {
+
+    public Cell(int x, int y, IUniverse universe) throws IllegalArgumentException {
         if (x < 0 || y < 0) {
             throw new IllegalArgumentException("Illegal Args: x: " + x + " y: " + y);
         }
-        this.elements = new ArrayList<>();
+        this.elements = new Stack<>();
         this.x = x;
         this.y = y;
+        this.universe = universe;
     }
 
     /**
@@ -49,7 +53,7 @@ public class Cell implements ICell {
         if (this.elements.contains(element)) {
             throw new ArrayStoreException("Element: " + element + " already exist in array");
         } else {
-            this.elements.add(element);
+            this.elements.push(element);
             element.setCell(this);
         }
     }
@@ -67,8 +71,6 @@ public class Cell implements ICell {
         } else {
             throw new ArrayStoreException("Element: " + element + " dont exist in array");
         }
-
-
     }
 
     /**
@@ -79,30 +81,45 @@ public class Cell implements ICell {
         return "x:" + x + " y:" + y;
     }
 
-    /**
-     * @return size of elements
-     */
-    public int size() {
-        return this.elements.size();
-    }
 
+    /**
+     * This function returns the universe that this object is in.
+     *
+     * @return The universe.
+     */
     @Override
     public IUniverse getIUniverse() {
-        return null;
+        return this.universe;
     }
 
+    /**
+     * Returns the top element of the stack.
+     *
+     * @return The top element of the stack.
+     */
     @Override
     public IElement getTopElement() {
-        return null;
+        return this.elements.peek();
     }
 
+    /**
+     * Returns the element at the specified index.
+     *
+     * @param i The index of the element to get.
+     * @return The element at the given index.
+     */
     @Override
     public IElement getElement(int i) throws ArrayIndexOutOfBoundsException {
-        return null;
+        return elements.get(i);
     }
 
+    /**
+     * Returns the number of elements in the list.
+     *
+     * @return The number of elements in the list.
+     */
     @Override
     public int getNumberOfElements() {
-        return elements.size();
+        return this.elements.size();
     }
 }

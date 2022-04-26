@@ -1,5 +1,10 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
+import ch.heia.isc.gl1.simulife.interface_.IElement;
+
+import java.awt.*;
+import java.util.Map;
+
 /**
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
  * @author Maumary Quentin <quentin.maumary@edu.hefr.ch>
@@ -10,8 +15,7 @@ package ch.hefr.iscrsid.gl1.strmauroc.models;
  */
 
 
-@Deprecated
-public class Element {
+public class Element implements IElement {
 
     private final String type;
     private Cell cell;
@@ -45,5 +49,30 @@ public class Element {
     @Override
     public String toString() {
         return "type:" + type + " cell:" + " " + cell;
+    }
+
+    @Override
+    public String getIconPath() {
+        return null;
+    }
+
+    @Override
+    public Color getColor() {
+        return null;
+    }
+
+    @Override
+    public char getCode() {
+        return 0;
+    }
+
+    @Override
+    public Map<String, String> getState() {
+        return null;
+    }
+
+    @Override
+    public void action() {
+
     }
 }
