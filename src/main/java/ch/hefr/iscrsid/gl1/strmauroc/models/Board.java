@@ -34,8 +34,8 @@ public class Board implements IUniverse {
         }
         this.cellBoard = new Cell[width][height];
 
-        for (int y = 0; y < (size); y++) {
-            for (int x = 0; x < (size); x++) {
+        for (int y = 0; y < (height); y++) {
+            for (int x = 0; x < (width); x++) {
                 Cell newCell = new Cell(x, y, this);
                 this.cellBoard[x][y] = newCell;
             }
