@@ -7,7 +7,7 @@ import ch.heia.isc.gl1.simulife.interface_.IUniverse;
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
  * @author Maumary Quentin <quentin.maumary@edu.hefr.ch>
  * @author Roch-Neirey Martin <martin.roch-neirey@edu.hefr.ch>
- * @version 1.0
+ * @version 2.0
  * @date 05.04.2022
  * @brief 2D Array of cells
  */
@@ -22,6 +22,9 @@ public class Board implements IUniverse {
      * @brief Constructor of Board with Exception handler
      */
     public Board(int size) throws IllegalArgumentException {
+
+        // TODO pakaré
+
         if (size < 0) {
             throw new IllegalArgumentException("Negative size. Size was: " + size);
         }

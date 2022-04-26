@@ -30,7 +30,11 @@ public abstract class App {
         myBoard.moveElement(element2, 4,4);
         System.out.println(myBoard);
 
-
-
     }
 }
+
+
+// TODO LIST
+// Diag séquence MobileAntenna et MobilePhone
+// UC diag
+// Desc files
