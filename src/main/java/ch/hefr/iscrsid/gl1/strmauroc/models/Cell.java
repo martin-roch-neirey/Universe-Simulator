@@ -7,6 +7,7 @@ import ch.heia.isc.gl1.simulife.interface_.IUniverse;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
@@ -18,13 +19,12 @@ import java.util.ArrayList;
  */
 
 public class Cell implements ICell {
-
     @Getter
     private final int x;
 
     @Getter
     private final int y;
-    private final ArrayList<Element> elements;
+    private final Stack<Element> elements;
 
     /**
      * @param x x coord
@@ -36,7 +36,7 @@ public class Cell implements ICell {
         if (x < 0 || y < 0) {
             throw new IllegalArgumentException("Illegal Args: x: " + x + " y: " + y);
         }
-        this.elements = new ArrayList<>();
+        this.elements = new Stack<>();
         this.x = x;
         this.y = y;
     }
@@ -49,7 +49,7 @@ public class Cell implements ICell {
         if (this.elements.contains(element)) {
             throw new ArrayStoreException("Element: " + element + " already exist in array");
         } else {
-            this.elements.add(element);
+            this.elements.push(element);
             element.setCell(this);
         }
     }
@@ -69,6 +69,7 @@ public class Cell implements ICell {
         }
 
 
+
     }
 
     /**
@@ -79,12 +80,6 @@ public class Cell implements ICell {
         return "x:" + x + " y:" + y;
     }
 
-    /**
-     * @return size of elements
-     */
-    public int size() {
-        return this.elements.size();
-    }
 
     @Override
     public IUniverse getIUniverse() {
@@ -93,16 +88,16 @@ public class Cell implements ICell {
 
     @Override
     public IElement getTopElement() {
-        return null;
+        return this.elements.peek();
     }
 
     @Override
     public IElement getElement(int i) throws ArrayIndexOutOfBoundsException {
-        return null;
+        return elements.get(i);
     }
 
     @Override
     public int getNumberOfElements() {
-        return 0;
+        return this.elements.size();
     }
 }

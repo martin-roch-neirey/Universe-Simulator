@@ -86,7 +86,7 @@ public class Board implements IUniverse {
         for (int y = 0; y < this.cellBoard.length; y++) {
             s.append("\n| ");
             for (Cell[] cells : this.cellBoard) {
-                switch (cells[y].size()) {
+                switch (cells[y].getNumberOfElements()) {
                     case 0:
                         s.append(" " + " | ");
                         break;
