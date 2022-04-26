@@ -24,7 +24,7 @@ under the License.
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
     <servers>
         <server>
-            <id>gitlab-maven</id>
+            <id>gitlab-maven-interface</id>
             <configuration>
                 <httpHeaders>
                     <property>
