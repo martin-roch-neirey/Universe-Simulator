@@ -4,6 +4,7 @@ package ch.hefr.iscrsid.gl1.strmauroc.models;
 import ch.heia.isc.gl1.simulife.interface_.ICell;
 import ch.heia.isc.gl1.simulife.interface_.IElement;
 import ch.heia.isc.gl1.simulife.interface_.IUniverse;
+import lombok.Getter;
 
 import java.util.ArrayList;
 
@@ -11,14 +12,17 @@ import java.util.ArrayList;
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
  * @author Maumary Quentin <quentin.maumary@edu.hefr.ch>
  * @author Roch-Neirey Martin <martin.roch-neirey@edu.hefr.ch>
- * @version 1.0
+ * @version 2.0
  * @date 05.04.2022
  * @brief Cell with elements
  */
 
 public class Cell implements ICell {
 
+    @Getter
     private final int x;
+
+    @Getter
     private final int y;
     private final ArrayList<Element> elements;
 
@@ -73,20 +77,6 @@ public class Cell implements ICell {
     @Override
     public String toString() {
         return "x:" + x + " y:" + y;
-    }
-
-    /**
-     * @return x
-     */
-    public int getX() {
-        return x;
-    }
-
-    /**
-     * @return y
-     */
-    public int getY() {
-        return y;
     }
 
     /**
