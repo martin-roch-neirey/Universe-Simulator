@@ -33,7 +33,7 @@ public class MobilePhone implements IElement {
 
     @Override
     public void action() {
-
+        this.setEnergy(this.getEnergy() - 1);
 
 
 
