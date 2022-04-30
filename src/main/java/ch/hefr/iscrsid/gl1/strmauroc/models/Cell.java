@@ -6,7 +6,7 @@ import ch.heia.isc.gl1.simulife.interface_.IElement;
 import ch.heia.isc.gl1.simulife.interface_.IUniverse;
 import lombok.Getter;
 
-import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 /**
@@ -98,7 +98,7 @@ public class Cell implements ICell {
      * @return The top element of the stack.
      */
     @Override
-    public IElement getTopElement() {
+    public IElement getTopElement() throws EmptyStackException {
         return this.elements.peek();
     }
 
