@@ -1,3 +1,4 @@
+/*
 package ch.hefr.iscrsid.gl1.strmauroc;
 
 import ch.hefr.iscrsid.gl1.strmauroc.models.Board;
@@ -9,19 +10,23 @@ import java.lang.reflect.Modifier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+*/
 /**
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
  * @author Maumary Quentin <quentin.maumary@edu.hefr.ch>
  * @author Roch-Neirey Martin <martin.roch-neirey@edu.hefr.ch>
  * @version 2.0
  * @date 26.04.2022
- */
+ *//*
+
 
 public class AppTest {
 
-    /**
+    */
+/**
      * This test should always pass
-     */
+     *//*
+
     @Test
     public void shouldAnswerWithTrue() {
         assertTrue(true);
@@ -376,3 +381,4 @@ public class AppTest {
 
 
 }
+*/

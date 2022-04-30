@@ -16,13 +16,16 @@ import java.util.Map;
  * @brief MobileAntenna object
  */
 
-public class MobileAntenna implements IElement {
+public class MobileAntenna extends Element implements IElement {
 
     @Getter
     private Map<String, String> state;
 
     public MobileAntenna() {
         state = new HashMap<>();
+
+        Board board = (Board) this.getCell().getIUniverse();
+        board.getAntennas().add(this);
     }
 
     @Override
@@ -45,4 +48,10 @@ public class MobileAntenna implements IElement {
         return null;
     }
 
+    @Override
+    void setCell(Cell cell) {
+        super.setCell(cell);
+        state.put("xLocation", String.valueOf(this.getCell().getX()));
+        state.put("yLocation", String.valueOf(this.getCell().getY()));
+    }
 }

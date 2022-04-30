@@ -14,21 +14,21 @@ import ch.hefr.iscrsid.gl1.strmauroc.models.*;
 
 public abstract class App {
     public static void main(String[] args) {
-        Board myBoard = new Board(10,50);
+        Board myBoard = new Board(10,10);
         System.out.println("----------------Init-----------------");
         System.out.println(myBoard);
         System.out.println();
         System.out.println("-----------------ADD-----------------");
-        Element element = new Element("S");
-        Element element2 = new Element("S");
-        myBoard.getICell(0,0).addElement(element);
-        myBoard.getICell(1,1).addElement(element2);
+        MobileAntenna antenna1 = new MobileAntenna();
+        MobileAntenna antenna2 = new MobileAntenna();
+        MobilePhone phone = new MobilePhone(10);
+        myBoard.getICell(0,0).addElement(antenna2);
+        myBoard.getICell(1,1).addElement(antenna1);
+        myBoard.getICell(1,2).addElement(phone);
+
         System.out.println(myBoard);
-        System.out.println();
-        System.out.println("-----------------MOVE----------------");
-        myBoard.moveElement(element, 4,4);
-        myBoard.moveElement(element2, 4,4);
-        System.out.println(myBoard);
+        myBoard.actionAll();
+        System.out.println(phone.getState().get("nearestAntenna"));
 
     }
 }

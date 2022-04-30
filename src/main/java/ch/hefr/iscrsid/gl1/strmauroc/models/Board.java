@@ -3,6 +3,7 @@ package ch.hefr.iscrsid.gl1.strmauroc.models;
 import ch.heia.isc.gl1.simulife.interface_.ICell;
 import ch.heia.isc.gl1.simulife.interface_.IElement;
 import ch.heia.isc.gl1.simulife.interface_.IUniverse;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +23,9 @@ public class Board implements IUniverse {
     private final int width;
     private final int height;
 
+    @Getter
+    private ArrayList<MobileAntenna> antennas;
+
     /**
      * @param width width of the board
      * @param height height of the board
@@ -32,6 +36,7 @@ public class Board implements IUniverse {
 
         this.width = width;
         this.height = height;
+        this.antennas = new ArrayList<>();
 
         if (width < 0 || height < 0) {
             throw new IllegalArgumentException("Negative size. Width was: " + width + " Height was: " + height);
