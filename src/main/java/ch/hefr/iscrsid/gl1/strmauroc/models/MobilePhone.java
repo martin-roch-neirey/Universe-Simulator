@@ -2,12 +2,10 @@ package ch.hefr.iscrsid.gl1.strmauroc.models;
 
 import ch.heia.isc.gl1.simulife.interface_.IElement;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
 
 /**
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
@@ -39,11 +37,13 @@ public class MobilePhone extends Element implements IElement {
         this.setEnergy(this.getEnergy() - 1);
         if (energy <= 0) {
             // TODO delete mobilePhone because it has no more energy
+            // Maybe iterate on every element in Board and detect if mobilePhone has energy <= 0 ?
+            // Then remove element from the board
             System.out.println("Phone delete");
         }
 
         Board board = (Board) this.getCell().getIUniverse();
-        double distance = Double.parseDouble(this.getState().getOrDefault("nearestAntenna", "99999999999"));
+        double distance = Double.parseDouble(this.getState().getOrDefault("nearestAntenna", String.valueOf(Integer.MAX_VALUE)));
 
         int xPhone = Integer.parseInt(this.getState().get("xLocation"));
         int yPhone = Integer.parseInt(this.getState().get("yLocation"));

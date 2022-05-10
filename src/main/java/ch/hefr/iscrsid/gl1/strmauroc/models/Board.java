@@ -179,6 +179,13 @@ public class Board implements IUniverse {
     public void actionAll() {
         for (IElement element : this.getAllElements()) {
             element.action();
+
+            if (element instanceof MobilePhone) {
+                if (((MobilePhone) element).getEnergy() <= 0) {
+                    ((MobilePhone) element).getCell().removeElement((MobilePhone) element);
+                }
+            }
+
         }
     }
 

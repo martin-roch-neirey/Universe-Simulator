@@ -19,8 +19,8 @@ public abstract class App {
         System.out.println(myBoard);
         System.out.println();
         System.out.println("-----------------ADD-----------------");
-        MobileAntenna antenna1 = new MobileAntenna();
-        MobileAntenna antenna2 = new MobileAntenna();
+        MobileAntenna antenna1 = new MobileAntenna(4);
+        MobileAntenna antenna2 = new MobileAntenna(4);
         MobilePhone phone = new MobilePhone(10);
         myBoard.getICell(0,0).addElement(antenna2);
         myBoard.getICell(1,1).addElement(antenna1);

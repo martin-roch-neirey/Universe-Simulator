@@ -6,15 +6,13 @@ import ch.heia.isc.gl1.simulife.interface_.AbstractView;
 public class View extends AbstractView {
 
     private Board board;
-    private boolean visible;
 
     @Override
     public void refresh() {
-        this.board.actionAll();
+        this.board.toString();
     }
 
     @Override
     public void setVisible(boolean b) {
-        this.visible = b;
     }
 }
