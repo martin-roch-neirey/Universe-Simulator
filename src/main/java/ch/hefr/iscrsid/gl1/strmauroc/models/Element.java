@@ -17,15 +17,12 @@ import java.util.Map;
 
 public class Element implements IElement {
 
-    private final String type;
     private Cell cell;
 
     /**
-     * @param type type of the element
      * @brief constructor with only type
      */
-    public Element(String type) {
-        this.type = type;
+    public Element() {
     }
 
     /**
@@ -48,7 +45,7 @@ public class Element implements IElement {
      */
     @Override
     public String toString() {
-        return "type:" + type + " cell:" + " " + cell;
+        return "type:" + " cell:" + " " + cell;
     }
 
     @Override

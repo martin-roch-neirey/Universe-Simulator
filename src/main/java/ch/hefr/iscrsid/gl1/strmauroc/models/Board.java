@@ -1,7 +1,12 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
 import ch.heia.isc.gl1.simulife.interface_.ICell;
+import ch.heia.isc.gl1.simulife.interface_.IElement;
 import ch.heia.isc.gl1.simulife.interface_.IUniverse;
+import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
@@ -18,6 +23,9 @@ public class Board implements IUniverse {
     private final int width;
     private final int height;
 
+    @Getter
+    private ArrayList<MobileAntenna> antennas;
+
     /**
      * @param width width of the board
      * @param height height of the board
@@ -28,6 +36,7 @@ public class Board implements IUniverse {
 
         this.width = width;
         this.height = height;
+        this.antennas = new ArrayList<>();
 
         if (width < 0 || height < 0) {
             throw new IllegalArgumentException("Negative size. Width was: " + width + " Height was: " + height);
@@ -131,6 +140,53 @@ public class Board implements IUniverse {
     @Override
     public Cell getICell(int width, int height) throws ArrayIndexOutOfBoundsException {
         return this.cellBoard[width][height];
+    }
+
+    /**
+     * Helper method
+     * Returns an ArrayList of all the cells in the board
+     *
+     * @return An ArrayList of all the cells.
+     */
+    private ArrayList<Cell> getAllCells() {
+        ArrayList<Cell> arrayList = new ArrayList<>();
+        for (Cell[] cells : this.cellBoard) {
+            arrayList.addAll(Arrays.asList(cells));
+        }
+        return arrayList;
+    }
+
+
+    /**
+     * Helper method
+     * Returns an ArrayList of all the elements in each cell, so all elements in the board
+     *
+     * @return An ArrayList of all the elements.
+     */
+    private ArrayList<IElement> getAllElements() {
+        ArrayList<IElement> arrayList = new ArrayList<>();
+        for (Cell cell : this.getAllCells()) {
+            for (int i = 0; i < cell.getNumberOfElements(); i++) {
+                arrayList.add(cell.getElement(i));
+            }
+        }
+        return arrayList;
+    }
+
+    /**
+     * Call action() method on all elements in the board
+     */
+    public void actionAll() {
+        for (IElement element : this.getAllElements()) {
+            element.action();
+
+            if (element instanceof MobilePhone) {
+                if (((MobilePhone) element).getEnergy() <= 0) {
+                    ((MobilePhone) element).getCell().removeElement((MobilePhone) element);
+                }
+            }
+
+        }
     }
 
 }

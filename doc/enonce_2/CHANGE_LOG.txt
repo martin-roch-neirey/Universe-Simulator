@@ -1,1 +1,5 @@
-// TODO
+---------------------
+BOARD REWORK :
+- Il est désormais possible de créer une Board en forme de rectangle
+- Nouveaux tests unitaires
+- Changement du système d'affichage pour correspondre au nouveau type de Board

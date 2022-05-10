@@ -2,6 +2,7 @@ package ch.hefr.iscrsid.gl1.strmauroc.models;
 
 import ch.heia.isc.gl1.simulife.interface_.IElement;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -16,18 +17,28 @@ import java.util.Map;
  * @brief MobileAntenna object
  */
 
-public class MobileAntenna implements IElement {
+public class MobileAntenna extends Element implements IElement {
 
     @Getter
-    private Map<String, String> state;
+    private final Map<String, String> state;
 
-    public MobileAntenna() {
+    @Setter
+    @Getter
+    private int coverageRadius;
+
+    public MobileAntenna(int coverageRadius) {
         state = new HashMap<>();
+        this.coverageRadius = coverageRadius;
+
+        Board board = (Board) this.getCell().getIUniverse();
+        board.getAntennas().add(this);
     }
 
     @Override
     public void action() {
-
+        // moves optionnally
+        // go away from other antennas
+        // or go near covered mobile phones
     }
 
     @Override
@@ -45,4 +56,21 @@ public class MobileAntenna implements IElement {
         return null;
     }
 
+    @Override
+    void setCell(Cell cell) {
+        super.setCell(cell);
+        state.put("xLocation", String.valueOf(this.getCell().getX()));
+        state.put("yLocation", String.valueOf(this.getCell().getY()));
+    }
+
+    private void getNearestAntenna() {
+        // TODO
+        // state.put("xNearestAntenna", );
+        // state.put("yNearestAntenna", );
+    }
+
+    private int getPhoneCovered() {
+        // TODO
+        return 0;
+    }
 }
