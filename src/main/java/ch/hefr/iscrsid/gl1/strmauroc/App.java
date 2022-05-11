@@ -1,6 +1,6 @@
 package ch.hefr.iscrsid.gl1.strmauroc;
 
-import ch.hefr.iscrsid.gl1.strmauroc.controllers.BoardController;
+import ch.hefr.iscrsid.gl1.strmauroc.controllers.IUniverseController;
 import ch.hefr.iscrsid.gl1.strmauroc.models.*;
 
 
@@ -31,7 +31,7 @@ public abstract class App {
         System.out.println(myBoard);
 
         System.out.println(myBoard);
-        BoardController.actionAll(myBoard, true);
+        IUniverseController.actionAll(myBoard);
         System.out.println(phone.getState().get("nearestAntenna"));
 
     }

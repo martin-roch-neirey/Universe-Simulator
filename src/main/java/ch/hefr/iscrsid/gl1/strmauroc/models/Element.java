@@ -18,7 +18,7 @@ import java.util.Map;
  */
 
 
-public class Element implements IElement {
+public abstract class Element implements IElement {
 
     private Cell cell;
 
@@ -44,6 +44,19 @@ public class Element implements IElement {
      */
     void setCell(Cell cell) {
         this.cell = cell;
+        if (cell == null) {
+            xLoc = -1;
+            yLoc = -1; // temporary values
+            // What value should we have if we REMOVE the element, so we set the cell to "null" ?
+            return;
+        } else {
+            xLoc = cell.getX();
+            yLoc = cell.getY();
+        }
+
+        // Do we have to update things in state map ? Not sure.
+        state.put("xLocation", String.valueOf(xLoc));
+        state.put("yLocation", String.valueOf(yLoc));
     }
 
     /**

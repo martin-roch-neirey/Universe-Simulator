@@ -50,13 +50,6 @@ public class MobileAntenna extends Element implements IElement {
         return null;
     }
 
-    @Override
-    void setCell(Cell cell) {
-        super.setCell(cell);
-        state.put("xLocation", String.valueOf(xLoc));
-        state.put("yLocation", String.valueOf(yLoc));
-    }
-
     private void getNearestAntenna() {
         // TODO
         // state.put("xNearestAntenna", );

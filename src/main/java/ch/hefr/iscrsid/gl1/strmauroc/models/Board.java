@@ -1,6 +1,7 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
 import ch.heia.isc.gl1.simulife.interface_.ICell;
+import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
 import ch.heia.isc.gl1.simulife.interface_.IElement;
 import ch.heia.isc.gl1.simulife.interface_.IUniverse;
 import lombok.Getter;
@@ -17,7 +18,7 @@ import java.util.Arrays;
  * @brief 2D Array of cells
  */
 
-public class Board implements IUniverse {
+public class Board implements IControllableUniverse {
 
     private final Cell[][] cellBoard;
     private final int width;
@@ -170,5 +171,20 @@ public class Board implements IUniverse {
     }
 
 
+    // TODO adapt actual methods to implement these three :
+    @Override
+    public void moveElement(IElement iElement, int i, int i1) throws ArrayIndexOutOfBoundsException {
+
+    }
+
+    @Override
+    public void addElement(IElement iElement, int i, int i1) throws ArrayIndexOutOfBoundsException {
+
+    }
+
+    @Override
+    public void removeElement(IElement iElement) throws IllegalArgumentException {
+
+    }
 }
 
