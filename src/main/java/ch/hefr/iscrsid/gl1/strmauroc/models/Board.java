@@ -1,13 +1,12 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
-import ch.heia.isc.gl1.simulife.interface_.ICell;
 import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
 import ch.heia.isc.gl1.simulife.interface_.IElement;
 import ch.heia.isc.gl1.simulife.interface_.IUniverse;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 /**
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
@@ -49,6 +48,19 @@ public class Board implements IControllableUniverse {
 
     }
 
+    private Cell getCellOfIElement(IElement element) {
+        for (int i = 0 ; i < this.cellBoard.length ; i++) {
+            for (int j = 0 ; j < this.cellBoard[0].length ; j++) {
+                for (int k = 0 ; k < this.cellBoard[i][j].getNumberOfElements() ; k++) {
+                    if (this.cellBoard[i][j].getElement(k) == element) {
+                        return this.getICell(i, j);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     /**
      * @param element element to move
      * @param x x destination coord
@@ -56,14 +68,16 @@ public class Board implements IControllableUniverse {
      * @throws NumberFormatException exception
      * @brief Move an Element to specific x and y
      */
-    public void moveElement(Element element, int x, int y) throws ArrayIndexOutOfBoundsException, ArrayStoreException {
+    public void moveElement(IElement element, int x, int y) throws ArrayIndexOutOfBoundsException, ArrayStoreException {
         if (x >= this.cellBoard.length || x < 0 || y >= this.cellBoard.length || y < 0) {
             throw new ArrayIndexOutOfBoundsException("Illegal Args: x: " + x + " y: " + y);
         }
 
-        element.getCell().removeElement(element);
-        this.getICell(x,y).addElement(element);
-        element.setCell(this.cellBoard[x][y]);
+        this.getCellOfIElement(element).removeElement(element);
+
+        this.addElement(element, x, y);
+        // Cast to be deleted if setPosition is added to IElement interface (or an extending interface)
+        ((Element)element).setPosition(x,y);
     }
 
     /**
@@ -171,20 +185,31 @@ public class Board implements IControllableUniverse {
     }
 
 
-    // TODO adapt actual methods to implement these three :
-    @Override
-    public void moveElement(IElement iElement, int i, int i1) throws ArrayIndexOutOfBoundsException {
-
-    }
 
     @Override
     public void addElement(IElement iElement, int i, int i1) throws ArrayIndexOutOfBoundsException {
-
+        this.getICell(i, i1).addElement(iElement);
     }
 
     @Override
     public void removeElement(IElement iElement) throws IllegalArgumentException {
+        this.getCellOfIElement(iElement).removeElement(iElement);
+    }
 
+    /**
+     * Enumerates the IElements contained in the universe given as parameter
+     * and calls the consumer function with each enumerated element as parameter.
+     * @param universe
+     * @param action
+     */
+    static void forEachElementOfUniverse(IUniverse universe, Consumer<IElement> action) {
+        for (int i = 0 ; i < universe.getWidth() ; i++) {
+            for (int j = 0 ; j < universe.getHeight() ; j++) {
+                for (int k = 0 ; k < universe.getICell(i,j).getNumberOfElements() ; k++) {
+                    action.accept(universe.getICell(i,j).getElement(k));
+                }
+            }
+        }
     }
 }
 

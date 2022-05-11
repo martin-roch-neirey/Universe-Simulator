@@ -2,6 +2,7 @@ package ch.hefr.iscrsid.gl1.strmauroc;
 
 import ch.hefr.iscrsid.gl1.strmauroc.controllers.IUniverseController;
 import ch.hefr.iscrsid.gl1.strmauroc.models.*;
+import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
 
 
 /**
@@ -22,7 +23,8 @@ public abstract class App {
         System.out.println("-----------------ADD-----------------");
         MobileAntenna antenna1 = new MobileAntenna(4);
         MobileAntenna antenna2 = new MobileAntenna(4);
-        MobilePhone phone = new MobilePhone(10);
+        IControllableUniverse icUni = myBoard;
+        MobilePhone phone = new MobilePhone(icUni, 10);
         myBoard.getICell(0,0).addElement(antenna2);
         myBoard.getICell(1,1).addElement(antenna1);
         myBoard.getICell(1,2).addElement(phone);

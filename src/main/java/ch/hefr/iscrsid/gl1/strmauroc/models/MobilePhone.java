@@ -1,5 +1,6 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
+import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
 import ch.heia.isc.gl1.simulife.interface_.IElement;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,21 +25,20 @@ public class MobilePhone extends Element implements IElement {
     private int energy;
 
     @Getter
-    private Board board;
+    private IControllableUniverse board;
 
-    public MobilePhone(int energy) {
+    public MobilePhone(IControllableUniverse board, int energy) {
         this.energy = energy;
         state = new HashMap<>();
         state.put("xLocation", String.valueOf(xLoc));
         state.put("yLocation", String.valueOf(yLoc));
         state.put("energy", String.valueOf(this.getEnergy()));
 
-        this.board = null;
+        this.board = board;
     }
 
     @Override
     public void action() {
-        if (this.board == null) this.board = (Board) this.getCell().getIUniverse();
         this.setEnergy(this.getEnergy() - 1);
         if (energy <= 0) {
             // TODO delete mobilePhone because it has no more energy
@@ -49,21 +49,22 @@ public class MobilePhone extends Element implements IElement {
 
         double distance = Double.parseDouble(this.getState().getOrDefault("nearestAntenna", String.valueOf(Integer.MAX_VALUE)));
 
+        /* Code disabled to allow execution.
         for (MobileAntenna antenna : this.getAntennas()) {
 
-                int xAntenna = Integer.parseInt(antenna.getState().get("xLocation"));
-                int yAntenna = Integer.parseInt(antenna.getState().get("yLocation"));
+            int xAntenna = Integer.parseInt(antenna.getState().get("xLocation"));
+            int yAntenna = Integer.parseInt(antenna.getState().get("yLocation"));
 
-                double newDistance = Math.sqrt((yAntenna - yLoc)^2 + (xAntenna - xLoc)^2);
+            double newDistance = Math.sqrt((yAntenna - yLoc) ^ 2 + (xAntenna - xLoc) ^ 2);
 
-                if (newDistance < distance) {
-                    distance = newDistance;
-                    System.out.println("Discovered a new nearest Antenna");
-                }
+            if (newDistance < distance) {
+                distance = newDistance;
+                System.out.println("Discovered a new nearest Antenna");
+            }
         }
 
         this.getState().put("nearestAntenna", String.valueOf(distance));
-
+        */
     }
 
     @Override
@@ -88,7 +89,7 @@ public class MobilePhone extends Element implements IElement {
 
     private ArrayList<MobileAntenna> getAntennas() {
         ArrayList<MobileAntenna> list = new ArrayList<>();
-        this.board.getAllElements().forEach(e -> {
+        Board.forEachElementOfUniverse(this.board, e -> {
             if (e instanceof MobileAntenna) list.add((MobileAntenna) e);
         });
         return list;
