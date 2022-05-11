@@ -3,6 +3,7 @@ package ch.hefr.iscrsid.gl1.strmauroc.models;
 
 import ch.heia.isc.gl1.simulife.interface_.ICell;
 import ch.heia.isc.gl1.simulife.interface_.IElement;
+import ch.heia.isc.gl1.simulife.interface_.IPositionnableElement;
 import ch.heia.isc.gl1.simulife.interface_.IUniverse;
 import lombok.Getter;
 
@@ -49,12 +50,12 @@ public class Cell implements ICell {
      * @param element element instance
      * @brief Add element in Cell
      */
-    public void addElement(IElement element) throws ArrayStoreException {
+    public void addElement(IPositionnableElement element) throws ArrayStoreException {
         if (this.elements.contains(element)) {
             throw new ArrayStoreException("Element: " + element + " already exist in array");
         } else {
             this.elements.push(element);
-            ((Element)element).setPosition(this.x, this.y);
+            element.setPosition(this.x, this.y);
         }
     }
 

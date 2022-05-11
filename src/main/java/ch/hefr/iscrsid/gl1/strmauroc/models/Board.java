@@ -2,6 +2,7 @@ package ch.hefr.iscrsid.gl1.strmauroc.models;
 
 import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
 import ch.heia.isc.gl1.simulife.interface_.IElement;
+import ch.heia.isc.gl1.simulife.interface_.IPositionnableElement;
 import ch.heia.isc.gl1.simulife.interface_.IUniverse;
 
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class Board implements IControllableUniverse {
      * @throws NumberFormatException exception
      * @brief Move an Element to specific x and y
      */
-    public void moveElement(IElement element, int x, int y) throws ArrayIndexOutOfBoundsException, ArrayStoreException {
+    public void moveElement(IPositionnableElement element, int x, int y) throws ArrayIndexOutOfBoundsException, ArrayStoreException {
         if (x >= this.cellBoard.length || x < 0 || y >= this.cellBoard.length || y < 0) {
             throw new ArrayIndexOutOfBoundsException("Illegal Args: x: " + x + " y: " + y);
         }
@@ -77,7 +78,7 @@ public class Board implements IControllableUniverse {
 
         this.addElement(element, x, y);
         // Cast to be deleted if setPosition is added to IElement interface (or an extending interface)
-        ((Element)element).setPosition(x,y);
+        element.setPosition(x,y);
     }
 
     /**
@@ -187,12 +188,12 @@ public class Board implements IControllableUniverse {
 
 
     @Override
-    public void addElement(IElement iElement, int i, int i1) throws ArrayIndexOutOfBoundsException {
+    public void addElement(IPositionnableElement iElement, int i, int i1) throws ArrayIndexOutOfBoundsException {
         this.getICell(i, i1).addElement(iElement);
     }
 
     @Override
-    public void removeElement(IElement iElement) throws IllegalArgumentException {
+    public void removeElement(IPositionnableElement iElement) throws IllegalArgumentException {
         this.getCellOfIElement(iElement).removeElement(iElement);
     }
 

@@ -1,6 +1,6 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
-import ch.heia.isc.gl1.simulife.interface_.IElement;
+import ch.heia.isc.gl1.simulife.interface_.IPositionnableElement;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +18,7 @@ import java.util.Map;
  */
 
 
-public abstract class Element implements IElement {
+public abstract class Element implements IPositionnableElement {
 
     protected Map<String, String> state;
 
