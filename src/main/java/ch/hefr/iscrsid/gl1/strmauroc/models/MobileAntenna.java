@@ -19,9 +19,6 @@ import java.util.Map;
 
 public class MobileAntenna extends Element implements IElement {
 
-    @Getter
-    private final Map<String, String> state;
-
     @Setter
     @Getter
     private int coverageRadius;

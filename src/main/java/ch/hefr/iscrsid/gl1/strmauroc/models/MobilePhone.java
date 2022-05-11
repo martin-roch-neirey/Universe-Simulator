@@ -24,9 +24,6 @@ public class MobilePhone extends Element implements IElement {
     private int energy;
 
     @Getter
-    private final Map<String, String> state;
-
-    @Getter
     private Board board;
 
     public MobilePhone(int energy) {

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,6 +21,8 @@ import java.util.Map;
 public class Element implements IElement {
 
     private Cell cell;
+
+    protected Map<String, String> state;
 
     @Setter
     @Getter
@@ -75,7 +78,7 @@ public class Element implements IElement {
 
     @Override
     public Map<String, String> getState() {
-        return null;
+        return new HashMap<>(state);
     }
 
     @Override
