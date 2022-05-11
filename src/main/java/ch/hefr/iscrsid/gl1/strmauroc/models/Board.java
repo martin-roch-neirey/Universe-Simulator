@@ -163,7 +163,7 @@ public class Board implements IUniverse {
      *
      * @return An ArrayList of all the elements.
      */
-    private ArrayList<IElement> getAllElements() {
+    public ArrayList<IElement> getAllElements() {
         ArrayList<IElement> arrayList = new ArrayList<>();
         for (Cell cell : this.getAllCells()) {
             for (int i = 0; i < cell.getNumberOfElements(); i++) {
@@ -173,21 +173,6 @@ public class Board implements IUniverse {
         return arrayList;
     }
 
-    /**
-     * Call action() method on all elements in the board
-     */
-    public void actionAll() {
-        for (IElement element : this.getAllElements()) {
-            element.action();
-
-            if (element instanceof MobilePhone) {
-                if (((MobilePhone) element).getEnergy() <= 0) {
-                    ((MobilePhone) element).getCell().removeElement((MobilePhone) element);
-                }
-            }
-
-        }
-    }
 
 }
 
