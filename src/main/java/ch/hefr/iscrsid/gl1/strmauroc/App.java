@@ -16,7 +16,7 @@ import ch.hefr.iscrsid.gl1.strmauroc.models.*;
 public abstract class App {
     public static void main(String[] args) {
         Board myBoard = new Board(10,10);
-        System.out.println("----------------Init-----------------");
+        System.out.println("----------------INIT-----------------");
         System.out.println(myBoard);
         System.out.println();
         System.out.println("-----------------ADD-----------------");
@@ -26,6 +26,9 @@ public abstract class App {
         myBoard.getICell(0,0).addElement(antenna2);
         myBoard.getICell(1,1).addElement(antenna1);
         myBoard.getICell(1,2).addElement(phone);
+        myBoard.moveElement(phone, 4, 4);
+        System.out.println("----------------MOVE-----------------");
+        System.out.println(myBoard);
 
         System.out.println(myBoard);
         BoardController.actionAll(myBoard, true);

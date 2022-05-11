@@ -1,6 +1,8 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
 import ch.heia.isc.gl1.simulife.interface_.IElement;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.awt.*;
 import java.util.Map;
@@ -18,6 +20,14 @@ import java.util.Map;
 public class Element implements IElement {
 
     private Cell cell;
+
+    @Setter
+    @Getter
+    protected int xLoc;
+
+    @Setter
+    @Getter
+    protected int yLoc;
 
     /**
      * @brief constructor with only type

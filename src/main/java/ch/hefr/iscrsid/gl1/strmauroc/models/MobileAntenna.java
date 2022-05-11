@@ -29,9 +29,6 @@ public class MobileAntenna extends Element implements IElement {
     public MobileAntenna(int coverageRadius) {
         state = new HashMap<>();
         this.coverageRadius = coverageRadius;
-
-        Board board = (Board) this.getCell().getIUniverse();
-        board.getAntennas().add(this);
     }
 
     @Override
@@ -59,8 +56,8 @@ public class MobileAntenna extends Element implements IElement {
     @Override
     void setCell(Cell cell) {
         super.setCell(cell);
-        state.put("xLocation", String.valueOf(this.getCell().getX()));
-        state.put("yLocation", String.valueOf(this.getCell().getY()));
+        state.put("xLocation", String.valueOf(xLoc));
+        state.put("yLocation", String.valueOf(yLoc));
     }
 
     private void getNearestAntenna() {
