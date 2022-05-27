@@ -57,7 +57,10 @@ public abstract class Element implements IPositionnableElement {
 
     @Override
     public Map<String, String> getState() {
-        return new HashMap<>(state);
+        Map<String, String> map = new HashMap<>(state);
+        map.put("xLoc", String.valueOf(xLoc));
+        map.put("yLoc", String.valueOf(yLoc));
+        return map;
     }
 
     @Override
@@ -66,8 +69,8 @@ public abstract class Element implements IPositionnableElement {
     }
 
     public void setPosition(int x, int y) {
-        this.state.put("xLoc", String.valueOf(x));
-        this.state.put("yLoc", String.valueOf(y));
+        this.xLoc = x;
+        this.yLoc = y;
     }
 
     public int getxLoc() {
