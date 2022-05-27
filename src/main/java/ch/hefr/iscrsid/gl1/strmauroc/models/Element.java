@@ -22,18 +22,14 @@ public abstract class Element implements IPositionnableElement {
 
     protected Map<String, String> state;
 
-    @Setter
-    @Getter
     protected int xLoc;
-
-    @Setter
-    @Getter
     protected int yLoc;
 
     /**
      * @brief constructor with only type
      */
     public Element() {
+        state = new HashMap<>();
     }
 
     /**
@@ -70,7 +66,16 @@ public abstract class Element implements IPositionnableElement {
     }
 
     public void setPosition(int x, int y) {
-        this.xLoc = x;
-        this.yLoc = y;
+        this.state.put("xLoc", String.valueOf(x));
+        this.state.put("yLoc", String.valueOf(y));
     }
+
+    public int getxLoc() {
+        return Integer.parseInt(this.state.getOrDefault("xLoc", null));
+    }
+
+    public int getyLoc() {
+        return Integer.parseInt(this.state.getOrDefault("yLoc", null));
+    }
+
 }

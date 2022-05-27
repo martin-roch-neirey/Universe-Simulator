@@ -1,10 +1,7 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
 
-import ch.heia.isc.gl1.simulife.interface_.ICell;
-import ch.heia.isc.gl1.simulife.interface_.IElement;
-import ch.heia.isc.gl1.simulife.interface_.IPositionnableElement;
-import ch.heia.isc.gl1.simulife.interface_.IUniverse;
+import ch.heia.isc.gl1.simulife.interface_.*;
 import lombok.Getter;
 
 import java.util.EmptyStackException;
@@ -27,7 +24,7 @@ public class Cell implements ICell {
     private final int y;
     private final Stack<IElement> elements;
 
-    private final IUniverse universe;
+    private final IControllableUniverse universe;
 
     /**
      * @param x x coord
@@ -36,7 +33,7 @@ public class Cell implements ICell {
      * @brief Constructor of Cell with Exception handler
      */
 
-    public Cell(int x, int y, IUniverse universe) throws IllegalArgumentException {
+    public Cell(int x, int y, IControllableUniverse universe) throws IllegalArgumentException {
         if (x < 0 || y < 0) {
             throw new IllegalArgumentException("Illegal Args: x: " + x + " y: " + y);
         }

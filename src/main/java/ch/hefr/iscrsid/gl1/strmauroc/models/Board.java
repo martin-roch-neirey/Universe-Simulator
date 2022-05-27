@@ -1,9 +1,6 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
-import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
-import ch.heia.isc.gl1.simulife.interface_.IElement;
-import ch.heia.isc.gl1.simulife.interface_.IPositionnableElement;
-import ch.heia.isc.gl1.simulife.interface_.IUniverse;
+import ch.heia.isc.gl1.simulife.interface_.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,7 +71,7 @@ public class Board implements IControllableUniverse {
             throw new ArrayIndexOutOfBoundsException("Illegal Args: x: " + x + " y: " + y);
         }
 
-        this.getCellOfIElement(element).removeElement(element);
+        this.removeElement(element);
 
         this.addElement(element, x, y);
         // Cast to be deleted if setPosition is added to IElement interface (or an extending interface)

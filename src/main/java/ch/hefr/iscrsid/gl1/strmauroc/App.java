@@ -25,16 +25,22 @@ public abstract class App {
         MobileAntenna antenna2 = new MobileAntenna(4);
         IControllableUniverse icUni = myBoard;
         MobilePhone phone = new MobilePhone(icUni, 10);
-        myBoard.getICell(0,0).addElement(antenna2);
-        myBoard.getICell(1,1).addElement(antenna1);
-        myBoard.getICell(1,2).addElement(phone);
-        myBoard.moveElement(phone, 4, 4);
-        System.out.println("----------------MOVE-----------------");
+        icUni.addElement(antenna2, 0, 0);
+        icUni.addElement(antenna1, 1, 1);
+        icUni.addElement(phone, 2, 3);
+
         System.out.println(myBoard);
+
+        System.out.println("----------------MOVE-----------------");
+        icUni.moveElement(phone, 4, 4);
 
         System.out.println(myBoard);
         IUniverseController.actionAll(myBoard);
-        System.out.println(phone.getState().get("nearestAntenna"));
+
+        System.out.println("----------------DELETE-----------------");
+        icUni.removeElement(phone);
+
+        System.out.println(myBoard);
 
     }
 }

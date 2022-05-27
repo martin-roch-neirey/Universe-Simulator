@@ -24,7 +24,7 @@ public class MobileAntenna extends Element implements IElement {
     private int coverageRadius;
 
     public MobileAntenna(int coverageRadius) {
-        state = new HashMap<>();
+        super();
         this.coverageRadius = coverageRadius;
     }
 
