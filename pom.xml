@@ -50,7 +50,7 @@
     <dependency>
       <groupId>ch.heia.isc.gl1.simulife</groupId>
       <artifactId>simulife-interface</artifactId>
-      <version>1.2</version>
+      <version>1.3</version>
     </dependency>
   </dependencies>
 

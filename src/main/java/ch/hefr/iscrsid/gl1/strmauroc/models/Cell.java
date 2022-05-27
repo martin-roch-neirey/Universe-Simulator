@@ -3,6 +3,7 @@ package ch.hefr.iscrsid.gl1.strmauroc.models;
 
 import ch.heia.isc.gl1.simulife.interface_.ICell;
 import ch.heia.isc.gl1.simulife.interface_.IElement;
+import ch.heia.isc.gl1.simulife.interface_.IPositionnableElement;
 import ch.heia.isc.gl1.simulife.interface_.IUniverse;
 import lombok.Getter;
 
@@ -24,7 +25,7 @@ public class Cell implements ICell {
 
     @Getter
     private final int y;
-    private final Stack<Element> elements;
+    private final Stack<IElement> elements;
 
     private final IUniverse universe;
 
@@ -49,12 +50,12 @@ public class Cell implements ICell {
      * @param element element instance
      * @brief Add element in Cell
      */
-    public void addElement(Element element) throws ArrayStoreException {
+    public void addElement(IPositionnableElement element) throws ArrayStoreException {
         if (this.elements.contains(element)) {
             throw new ArrayStoreException("Element: " + element + " already exist in array");
         } else {
             this.elements.push(element);
-            element.setCell(this);
+            element.setPosition(this.x, this.y);
         }
     }
 
@@ -64,10 +65,9 @@ public class Cell implements ICell {
      * @throws ArrayStoreException exception
      * @brief remove element
      */
-    public void removeElement(Element element) throws ArrayStoreException {
+    public void removeElement(IElement element) throws ArrayStoreException {
         if (this.elements.contains(element)) {
             this.elements.remove(element);
-            element.setCell(null);
         } else {
             throw new ArrayStoreException("Element: " + element + " dont exist in array");
         }

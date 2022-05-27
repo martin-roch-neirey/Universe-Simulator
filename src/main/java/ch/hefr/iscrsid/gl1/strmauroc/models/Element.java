@@ -1,6 +1,6 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
-import ch.heia.isc.gl1.simulife.interface_.IElement;
+import ch.heia.isc.gl1.simulife.interface_.IPositionnableElement;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,9 +18,7 @@ import java.util.Map;
  */
 
 
-public abstract class Element implements IElement {
-
-    private Cell cell;
+public abstract class Element implements IPositionnableElement {
 
     protected Map<String, String> state;
 
@@ -39,39 +37,11 @@ public abstract class Element implements IElement {
     }
 
     /**
-     * @param cell cell instance
-     * @brief set cell to element
-     */
-    void setCell(Cell cell) {
-        this.cell = cell;
-        if (cell == null) {
-            xLoc = -1;
-            yLoc = -1; // temporary values
-            // What value should we have if we REMOVE the element, so we set the cell to "null" ?
-            return;
-        } else {
-            xLoc = cell.getX();
-            yLoc = cell.getY();
-        }
-
-        // Do we have to update things in state map ? Not sure.
-        state.put("xLocation", String.valueOf(xLoc));
-        state.put("yLocation", String.valueOf(yLoc));
-    }
-
-    /**
-     * @return Cell
-     */
-    public Cell getCell() {
-        return this.cell;
-    }
-
-    /**
      * @return element info
      */
     @Override
     public String toString() {
-        return "type:" + " cell:" + " " + cell;
+        return "type:" + " position:" + " " + xLoc + ":" + yLoc;
     }
 
     @Override
@@ -97,5 +67,10 @@ public abstract class Element implements IElement {
     @Override
     public void action() {
 
+    }
+
+    public void setPosition(int x, int y) {
+        this.xLoc = x;
+        this.yLoc = y;
     }
 }
