@@ -92,6 +92,7 @@ public abstract class Element implements IPositionnableElement {
      * @values :
      * - xLoc : x location
      * - yLox : y location
+     * - nearestAntenna : the nearestAntenna from the actual object
      *
      * @return A copy of the map.
      */

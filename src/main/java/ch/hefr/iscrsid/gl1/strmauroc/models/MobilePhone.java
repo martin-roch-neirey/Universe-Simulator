@@ -53,11 +53,6 @@ public class MobilePhone extends Element {
             int yAntenna = antenna.getYLoc();
 
             double newDistance = Point2D.distance(xAntenna, yAntenna, this.getXLoc(), this.getYLoc());
-            System.out.println("yA: " + yAntenna);
-            System.out.println("xA: " + xAntenna);
-            System.out.println("y: " + yLoc);
-            System.out.println("x: " + yLoc);
-            System.out.println("nd=" + newDistance);
 
             if (newDistance < distance) { // found a new nearest Antenna
                 distance = newDistance;

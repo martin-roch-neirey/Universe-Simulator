@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
@@ -87,8 +89,37 @@ public class MobileAntenna extends Element {
 
     }
 
-    private int getPhoneCovered() {
-        // TODO
-        return 0;
+    /**
+     * @values :
+     *    - phonesCovered : number of phones covered by the antenna
+     *
+     * @return the map
+     */
+    @Override
+    public Map<String, String> getState() {
+        Map<String, String> map = super.getState();
+        map.put("phonesCovered", String.valueOf(this.getPhonesCovered()));
+        return map;
+    }
+
+
+    /**
+     * For each element in the universe, if it's a phone, and it's within the coverage radius, increment the return value.
+     *
+     * @return The number of phones covered by the mobile antenna.
+     */
+    private int getPhonesCovered() {
+        AtomicInteger result = new AtomicInteger();
+        Board.forEachElementOfUniverse(this.universe, e -> {
+            if (e instanceof MobilePhone) {
+                MobilePhone p = (MobilePhone) e;
+                if (p.getXLoc() <= getXLoc() + getCoverageRadius() && p.getXLoc() >= getXLoc() - getCoverageRadius()) {
+                    if (p.getYLoc() <= getYLoc() + getCoverageRadius() && p.getYLoc() >= getYLoc() - getXLoc()) {
+                        result.getAndIncrement();
+                    }
+                }
+            }
+        });
+        return result.get();
     }
 }

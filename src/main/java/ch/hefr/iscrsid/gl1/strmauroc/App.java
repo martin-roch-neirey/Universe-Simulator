@@ -23,11 +23,12 @@ public abstract class App {
         System.out.println();
         System.out.println("-----------------ADD-----------------");
         MobileAntenna antenna1 = new MobileAntenna(myBoard, 4);
-        MobileAntenna antenna2 = new MobileAntenna(myBoard, 4);
+        // MobileAntenna antenna2 = new MobileAntenna(myBoard, 4);
         MobilePhone phone = new MobilePhone(myBoard, 10);
-        myBoard.addElement(antenna1, 5, 5);
-        myBoard.addElement(phone, 3, 3);
-        myBoard.addElement(antenna2, 8, 8);
+        MobilePhone phone2 = new MobilePhone(myBoard, 10);
+        myBoard.addElement(antenna1, 7, 7);
+        myBoard.addElement(phone, 4, 4);
+        myBoard.addElement(phone2, 0, 0);
 
         System.out.println(myBoard);
 
