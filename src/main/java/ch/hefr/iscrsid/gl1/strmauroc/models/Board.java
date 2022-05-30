@@ -92,13 +92,13 @@ public class Board implements IControllableUniverse {
             for (int x = 0; x < getWidth(); x++) {
                 switch (getICell(x, y).getNumberOfElements()) {
                     case 0:
-                        s.append(" " + " | ");
+                        s.append("  | ");
                         break;
                     case 1:
-                        s.append("X" + " | ");
+                        s.append(getICell(x, y).getTopElement().getCode()).append(" | ");
                         break;
                     default:
-                        s.append("M" + " | ");
+                        s.append("M | ");
                         break;
                 }
 
@@ -110,7 +110,8 @@ public class Board implements IControllableUniverse {
         s.append("|              Legend:                     |\n");
         s.append("|------------------------------------------|\n");
         s.append("|  \" \", No Element                         |\n");
-        s.append("|  \"X\", One Element                        |\n");
+        s.append("|  \"A\", One Mobile Antenna                 |\n");
+        s.append("|  \"T\", One Mobile Phone                   |\n");
         s.append("|  \"M\", Multiple Elements                  |\n");
         s.append("--------------------------------------------\n");
         return s.toString();

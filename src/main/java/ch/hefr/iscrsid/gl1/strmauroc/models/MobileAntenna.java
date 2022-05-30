@@ -22,7 +22,7 @@ public class MobileAntenna extends Element {
     private int coverageRadius;
 
     public MobileAntenna(IControllableUniverse universe, int coverageRadius) {
-        super(universe);
+        super(universe, 'A');
         this.coverageRadius = coverageRadius;
     }
 

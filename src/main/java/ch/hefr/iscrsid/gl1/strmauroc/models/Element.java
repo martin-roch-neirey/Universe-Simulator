@@ -29,6 +29,8 @@ public abstract class Element implements IPositionnableElement {
     @Getter
     protected int yLoc;
 
+    protected char code;
+
     @Getter
     @Setter
     protected IControllableUniverse universe;
@@ -36,8 +38,9 @@ public abstract class Element implements IPositionnableElement {
     /**
      * @brief constructor with only type
      */
-    public Element(IControllableUniverse universe) {
+    public Element(IControllableUniverse universe, char code) {
         this.universe = universe;
+        this.code = code;
         state = new HashMap<>();
     }
 
@@ -61,7 +64,7 @@ public abstract class Element implements IPositionnableElement {
 
     @Override
     public char getCode() {
-        return 0;
+        return this.code;
     }
 
     /**

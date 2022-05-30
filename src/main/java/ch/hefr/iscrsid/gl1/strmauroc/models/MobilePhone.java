@@ -22,7 +22,7 @@ public class MobilePhone extends Element {
     private int energy;
 
     public MobilePhone(IControllableUniverse universe, int energy) {
-        super(universe);
+        super(universe, 'T');
         this.energy = energy;
     }
 
