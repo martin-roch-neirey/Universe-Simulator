@@ -23,9 +23,11 @@ public abstract class App {
         System.out.println();
         System.out.println("-----------------ADD-----------------");
         MobileAntenna antenna1 = new MobileAntenna(myBoard, 4);
+        MobileAntenna antenna2 = new MobileAntenna(myBoard, 4);
         MobilePhone phone = new MobilePhone(myBoard, 10);
-        myBoard.addElement(phone, 8, 0);
-        myBoard.addElement(antenna1, 8, 8);
+        myBoard.addElement(antenna1, 5, 5);
+        myBoard.addElement(phone, 3, 3);
+        myBoard.addElement(antenna2, 8, 8);
 
         System.out.println(myBoard);
 
@@ -36,9 +38,11 @@ public abstract class App {
             System.out.println("time unit = " + i);
             IUniverseController.actionAll(myBoard);
             System.out.println(myBoard);
-            if (i == 2) myBoard.moveElement(antenna1, 1,5);
-            System.out.println(phone.getState());
-            TimeUnit.SECONDS.sleep(10);
+            // System.out.println(phone.getState());
+            System.out.println("antenna1= "+antenna1.getState());
+            // System.out.println("antenna2= "+antenna2.getState());
+            System.out.println("phone= " + phone.getState());
+            TimeUnit.SECONDS.sleep(4);
         }
 
     }

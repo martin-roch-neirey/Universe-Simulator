@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +29,9 @@ public abstract class Element implements IPositionnableElement {
 
     @Getter
     protected int yLoc;
+
+    @Getter
+    protected MobileAntenna nearestAntenna;
 
     protected char code;
     protected Color color;
@@ -110,4 +114,18 @@ public abstract class Element implements IPositionnableElement {
         this.xLoc = x;
         this.yLoc = y;
     }
+
+    /**
+     * @return A list of all the MobileAntenna objects in the universe of the mobile phone.
+     */
+    protected ArrayList<MobileAntenna> getAntennas() {
+        ArrayList<MobileAntenna> list = new ArrayList<>();
+        Board.forEachElementOfUniverse(this.universe, e -> {
+            if (e instanceof MobileAntenna) {
+                list.add((MobileAntenna) e);
+            }
+        });
+        return list;
+    }
+
 }

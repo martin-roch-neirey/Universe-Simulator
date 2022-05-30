@@ -4,7 +4,7 @@ import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
 import lombok.Getter;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.awt.geom.Point2D;
 import java.util.Map;
 
 /**
@@ -21,9 +21,6 @@ public class MobilePhone extends Element {
     @Getter
     private int energy;
 
-    @Getter
-    private MobileAntenna nearestAntenna;
-
     /**
      * @brief mobile phone constructor
      */
@@ -39,13 +36,11 @@ public class MobilePhone extends Element {
     @Override
     public void action() {
         this.setEnergy(this.energy - 1);
-        System.out.println("energy="+energy );
 
         // has the phone enough energy to live ?
         if (this.energy <= 0) {
             this.getUniverse().removeElement(this);
             this.universe = null;
-            System.out.println("phone deleted");
             return;
         }
 
@@ -57,16 +52,20 @@ public class MobilePhone extends Element {
             int xAntenna = antenna.getXLoc();
             int yAntenna = antenna.getYLoc();
 
-            double newDistance = Math.sqrt((yAntenna - yLoc) ^ 2 + (xAntenna - xLoc) ^ 2);
+            double newDistance = Point2D.distance(xAntenna, yAntenna, this.getXLoc(), this.getYLoc());
+            System.out.println("yA: " + yAntenna);
+            System.out.println("xA: " + xAntenna);
+            System.out.println("y: " + yLoc);
+            System.out.println("x: " + yLoc);
+            System.out.println("nd=" + newDistance);
 
             if (newDistance < distance) { // found a new nearest Antenna
                 distance = newDistance;
                 this.nearestAntenna = antenna;
-                this.state.put("nearestAntenna", String.valueOf(distance));
             }
         }
 
-        this.getState().put("nearestAntenna", String.valueOf(distance));
+        this.state.put("nearestAntenna", String.valueOf(distance));
 
         // move to nearest Antenna :
         if (this.nearestAntenna != null) {
@@ -101,6 +100,8 @@ public class MobilePhone extends Element {
         }
 
 
+
+
     }
 
     /**
@@ -123,17 +124,6 @@ public class MobilePhone extends Element {
         this.energy = energy;
     }
 
-    /**
-     * @return A list of all the MobileAntenna objects in the universe of the mobile phone.
-     */
-    private ArrayList<MobileAntenna> getAntennas() {
-        ArrayList<MobileAntenna> list = new ArrayList<>();
-        Board.forEachElementOfUniverse(this.universe, e -> {
-            if (e instanceof MobileAntenna) {
-                list.add((MobileAntenna) e);
-            }
-        });
-        return list;
-    }
+
 
 }
