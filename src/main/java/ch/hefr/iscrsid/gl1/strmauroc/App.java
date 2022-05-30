@@ -1,9 +1,6 @@
 package ch.hefr.iscrsid.gl1.strmauroc;
 
-import ch.hefr.iscrsid.gl1.strmauroc.controllers.IUniverseController;
 import ch.hefr.iscrsid.gl1.strmauroc.models.*;
-import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
-
 
 /**
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
@@ -44,8 +41,6 @@ public abstract class App {
 
         System.out.println("----------------DELETE-----------------");
         myBoard.removeElement(phone);
-        System.out.println(phone.getXLoc() + " " + phone.getYLoc());
-
         System.out.println(myBoard);
 
     }

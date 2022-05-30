@@ -30,6 +30,7 @@ public abstract class Element implements IPositionnableElement {
     protected int yLoc;
 
     protected char code;
+    protected Color color;
 
     @Getter
     @Setter
@@ -38,9 +39,10 @@ public abstract class Element implements IPositionnableElement {
     /**
      * @brief constructor with only type
      */
-    public Element(IControllableUniverse universe, char code) {
+    public Element(IControllableUniverse universe, char code, Color color) {
         this.universe = universe;
         this.code = code;
+        this.color = color;
         state = new HashMap<>();
     }
 
@@ -52,16 +54,25 @@ public abstract class Element implements IPositionnableElement {
         return "type:" + " position:" + " " + xLoc + ":" + yLoc;
     }
 
+    /**
+     * @return path of the icon
+     */
     @Override
     public String getIconPath() {
         return null;
     }
 
+    /**
+     * @return color of the element
+     */
     @Override
     public Color getColor() {
-        return null;
+        return this.color;
     }
 
+    /**
+     * @return code of the element
+     */
     @Override
     public char getCode() {
         return this.code;

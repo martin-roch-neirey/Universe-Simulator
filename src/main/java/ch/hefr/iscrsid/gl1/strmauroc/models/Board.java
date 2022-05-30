@@ -46,6 +46,10 @@ public class Board implements IControllableUniverse {
 
     }
 
+    /**
+     * @param element element in the cell
+     * @return ICell of the specified element. Result can be null
+     */
     private Cell getCellOfIElement(IElement element) {
         for (int i = 0 ; i < this.cellBoard.length ; i++) {
             for (int j = 0 ; j < this.cellBoard[0].length ; j++) {
@@ -181,12 +185,21 @@ public class Board implements IControllableUniverse {
     }
 
 
-
+    /**
+     * @param iElement element to add
+     * @param i x coordinate
+     * @param i1 y coordinate
+     * @brief add a positionnable element on the board to specified coordinates
+     */
     @Override
     public void addElement(IPositionnableElement iElement, int i, int i1) throws ArrayIndexOutOfBoundsException {
         this.getICell(i, i1).addElement(iElement);
     }
 
+    /**
+     * @param iElement element to remove
+     * @brief remove a positionnable element from the board
+     */
     @Override
     public void removeElement(IPositionnableElement iElement) throws IllegalArgumentException {
         this.getCellOfIElement(iElement).removeElement(iElement);

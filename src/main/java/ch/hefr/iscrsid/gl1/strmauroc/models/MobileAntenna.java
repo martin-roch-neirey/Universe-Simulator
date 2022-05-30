@@ -21,11 +21,17 @@ public class MobileAntenna extends Element {
     @Getter
     private int coverageRadius;
 
+    /**
+     * @brief mobile antenna constructor
+     */
     public MobileAntenna(IControllableUniverse universe, int coverageRadius) {
-        super(universe, 'A');
+        super(universe, 'A', Color.PINK);
         this.coverageRadius = coverageRadius;
     }
 
+    /**
+     * Action method called on a mobile antenna to reproduce behavior specified in project requirements
+     */
     @Override
     public void action() {
         // moves optionnally

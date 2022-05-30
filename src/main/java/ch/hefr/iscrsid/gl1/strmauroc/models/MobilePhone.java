@@ -1,9 +1,9 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
 import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
-import ch.heia.isc.gl1.simulife.interface_.IElement;
 import lombok.Getter;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -21,11 +21,18 @@ public class MobilePhone extends Element {
     @Getter
     private int energy;
 
+    /**
+     * @brief mobile phone constructor
+     */
     public MobilePhone(IControllableUniverse universe, int energy) {
-        super(universe, 'T');
+        super(universe, 'T', Color.CYAN);
         this.energy = energy;
     }
 
+
+    /**
+     * Action method called on a mobile phone to reproduce behavior specified in project requirements
+     */
     @Override
     public void action() {
         this.setEnergy(this.energy - 1);
