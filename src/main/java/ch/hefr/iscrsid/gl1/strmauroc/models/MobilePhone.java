@@ -63,7 +63,6 @@ public class MobilePhone extends Element {
                 distance = newDistance;
                 this.nearestAntenna = antenna;
                 this.state.put("nearestAntenna", String.valueOf(distance));
-                System.out.println("new nearest");
             }
         }
 
@@ -75,6 +74,7 @@ public class MobilePhone extends Element {
             int xDest = nearestAntenna.getXLoc();
             int yDest = nearestAntenna.getYLoc();
 
+            // if phone is on same cell as nearest antenna, don't move
             if (nearestAntenna.getUniverse().getICell(nearestAntenna.getXLoc(), nearestAntenna.getYLoc()) ==
                     this.getUniverse().getICell(this.getXLoc(), this.getYLoc())) return;
 
@@ -84,14 +84,17 @@ public class MobilePhone extends Element {
             if (xDest > this.getXLoc()) xRight = true;
             if (yDest > this.getYLoc()) yDown = true;
 
+            // x management
             if (xRight && this.getXLoc() < this.getUniverse().getWidth()) {
                 this.getUniverse().moveElement(this, this.getXLoc() + 1, this.getYLoc());
-            } else {
+            } else if (!(xDest == this.getXLoc())){
                 this.getUniverse().moveElement(this, this.getXLoc() - 1, this.getYLoc());
             }
+
+            // y management
             if (yDown && this.getYLoc() < this.getUniverse().getHeight()) {
                 this.getUniverse().moveElement(this, this.getXLoc(), this.getYLoc() + 1);
-            } else {
+            } else if (!(yDest == this.getYLoc())){
                 this.getUniverse().moveElement(this, this.getXLoc(), this.getYLoc() - 1);
             }
 
@@ -124,12 +127,10 @@ public class MobilePhone extends Element {
      * @return A list of all the MobileAntenna objects in the universe of the mobile phone.
      */
     private ArrayList<MobileAntenna> getAntennas() {
-        System.out.println("function called");
         ArrayList<MobileAntenna> list = new ArrayList<>();
         Board.forEachElementOfUniverse(this.universe, e -> {
             if (e instanceof MobileAntenna) {
                 list.add((MobileAntenna) e);
-                System.out.println("added Antenna");
             }
         });
         return list;
