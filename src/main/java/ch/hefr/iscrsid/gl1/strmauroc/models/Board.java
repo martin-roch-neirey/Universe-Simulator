@@ -75,8 +75,12 @@ public class Board implements IControllableUniverse {
             throw new ArrayIndexOutOfBoundsException("Illegal Args: x: " + x + " y: " + y);
         }
 
-        this.removeElement(element);
-        this.addElement(element, x, y);
+        if (this.getAllElements().contains(element)) {
+            this.removeElement(element);
+            this.addElement(element, x, y);
+            System.out.println("yes");
+        }
+
     }
 
     /**
