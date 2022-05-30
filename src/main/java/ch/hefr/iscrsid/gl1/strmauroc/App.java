@@ -21,24 +21,24 @@ public abstract class App {
         System.out.println(myBoard);
         System.out.println();
         System.out.println("-----------------ADD-----------------");
-        MobileAntenna antenna1 = new MobileAntenna(4);
-        MobileAntenna antenna2 = new MobileAntenna(4);
+        MobileAntenna antenna1 = new MobileAntenna(myBoard, 4);
+        MobileAntenna antenna2 = new MobileAntenna(myBoard, 4);
         IControllableUniverse icUni = myBoard;
         MobilePhone phone = new MobilePhone(icUni, 10);
+        icUni.addElement(phone, 1, 4);
         icUni.addElement(antenna2, 0, 0);
         icUni.addElement(antenna1, 1, 1);
-        icUni.addElement(phone, 2, 3);
 
         System.out.println(myBoard);
 
         System.out.println("----------------MOVE-----------------");
-        icUni.moveElement(phone, 4, 4);
 
         System.out.println(myBoard);
         IUniverseController.actionAll(myBoard);
 
         System.out.println("----------------DELETE-----------------");
         icUni.removeElement(phone);
+        System.out.println(phone.getXLoc() + " " + phone.getYLoc());
 
         System.out.println(myBoard);
 

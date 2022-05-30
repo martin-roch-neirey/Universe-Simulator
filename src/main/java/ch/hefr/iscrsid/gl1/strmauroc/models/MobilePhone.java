@@ -3,11 +3,8 @@ package ch.hefr.iscrsid.gl1.strmauroc.models;
 import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
 import ch.heia.isc.gl1.simulife.interface_.IElement;
 import lombok.Getter;
-import lombok.Setter;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -19,30 +16,22 @@ import java.util.Map;
  * @brief MobilePhone object
  */
 
-public class MobilePhone extends Element implements IElement {
+public class MobilePhone extends Element {
 
     @Getter
     private int energy;
 
-    @Getter
-    @Setter
-    private IControllableUniverse board;
-
-    public MobilePhone(IControllableUniverse board, int energy) {
-        super();
+    public MobilePhone(IControllableUniverse universe, int energy) {
+        super(universe);
         this.energy = energy;
-        state.put("xLocation", String.valueOf(xLoc));
-        state.put("yLocation", String.valueOf(yLoc));
-        state.put("energy", String.valueOf(this.getEnergy()));
-
-        this.board = board;
     }
 
     @Override
     public void action() {
         this.setEnergy(this.energy - 1);
         if (this.energy <= 0) {
-            this.getBoard().removeElement(this);
+            this.getUniverse().removeElement(this);
+            this.universe = null;
             // System.out.println("Phone delete");
         }
 
@@ -67,21 +56,12 @@ public class MobilePhone extends Element implements IElement {
 
     }
 
-    @Override
-    public char getCode() {
-        return 0;
-    }
-
-    @Override
-    public Color getColor() {
-        return null;
-    }
-
-    @Override
-    public String getIconPath() {
-        return null;
-    }
-
+    /**
+     * @values :
+     *    - energy : energy of the mobile phone
+     *
+     * @return the map given by the super method with the energy of the mobile phone.
+     */
     @Override
     public Map<String, String> getState() {
         Map<String, String> map = super.getState();
@@ -89,14 +69,19 @@ public class MobilePhone extends Element implements IElement {
         return map;
     }
 
+    /**
+     * @param energy The amount of energy the mobile phone has.
+     */
     public void setEnergy(int energy) {
         this.energy = energy;
-        this.state.put("energy", String.valueOf(energy));
     }
 
+    /**
+     * @return A list of all the MobileAntenna objects in the universe of the mobile phone.
+     */
     private ArrayList<MobileAntenna> getAntennas() {
         ArrayList<MobileAntenna> list = new ArrayList<>();
-        Board.forEachElementOfUniverse(this.board, e -> {
+        Board.forEachElementOfUniverse(this.universe, e -> {
             if (e instanceof MobileAntenna) list.add((MobileAntenna) e);
         });
         return list;

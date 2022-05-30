@@ -72,10 +72,7 @@ public class Board implements IControllableUniverse {
         }
 
         this.removeElement(element);
-
         this.addElement(element, x, y);
-        // Cast to be deleted if setPosition is added to IElement interface (or an extending interface)
-        element.setPosition(x,y);
     }
 
     /**
@@ -197,8 +194,8 @@ public class Board implements IControllableUniverse {
     /**
      * Enumerates the IElements contained in the universe given as parameter
      * and calls the consumer function with each enumerated element as parameter.
-     * @param universe
-     * @param action
+     * @param universe the universe
+     * @param action the action
      */
     static void forEachElementOfUniverse(IUniverse universe, Consumer<IElement> action) {
         for (int i = 0 ; i < universe.getWidth() ; i++) {

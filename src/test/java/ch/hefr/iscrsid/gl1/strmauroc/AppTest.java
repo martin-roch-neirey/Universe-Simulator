@@ -1,9 +1,10 @@
-/*
+
+
 package ch.hefr.iscrsid.gl1.strmauroc;
 
 import ch.hefr.iscrsid.gl1.strmauroc.models.Board;
 import ch.hefr.iscrsid.gl1.strmauroc.models.Cell;
-import ch.hefr.iscrsid.gl1.strmauroc.models.Element;
+import ch.hefr.iscrsid.gl1.strmauroc.models.MobilePhone;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Modifier;
@@ -11,22 +12,26 @@ import java.util.EmptyStackException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-*/
+
+
 /**
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
  * @author Maumary Quentin <quentin.maumary@edu.hefr.ch>
  * @author Roch-Neirey Martin <martin.roch-neirey@edu.hefr.ch>
- * @version 2.0
- * @date 26.04.2022
- *//*
+ * @version 2.1
+ * @date 30.05.2022
+ */
+
 
 
 public class AppTest {
 
-    */
-/**
+
+
+    /**
      * This test should always pass
-     *//*
+     */
+
 
     @Test
     public void shouldAnswerWithTrue() {
@@ -75,7 +80,7 @@ public class AppTest {
     @Test
     public void boardWidthHeightNotInvertedTest() {
         Board test = new Board(10, 10);
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(test, 10);
         test.getICell(2, 4).addElement(element);
         assertEquals(test.getICell(2, 4).getNumberOfElements(), 1);
         assertEquals(test.getICell(4, 2).getNumberOfElements(), 0);
@@ -144,7 +149,7 @@ public class AppTest {
     @Test
     public void boardAddElementTest() {
         Board myBoard = new Board(10, 10);
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(myBoard, 10);
         myBoard.getICell(0, 0).addElement(element);
         assertEquals(myBoard.getICell(0, 0).getNumberOfElements(), 1);
     }
@@ -152,8 +157,8 @@ public class AppTest {
     @Test
     public void boardAddElementTest2() throws ArrayIndexOutOfBoundsException, ArrayStoreException {
         Board myBoard = new Board(10, 10);
-        Element element = new Element("S");
-        Element element2 = new Element("S");
+        MobilePhone element = new MobilePhone(myBoard, 10);
+        MobilePhone element2 = new MobilePhone(myBoard, 10);
         myBoard.getICell(0, 0).addElement(element);
         myBoard.getICell(0, 0).addElement(element2);
         assertEquals(myBoard.getICell(0, 0).getNumberOfElements(), 2);
@@ -162,7 +167,7 @@ public class AppTest {
     @Test
     public void boardAddElementTest3() throws ArrayIndexOutOfBoundsException, ArrayStoreException {
         Board myBoard = new Board(10, 10);
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(myBoard, 10);
         myBoard.getICell(0, 0).addElement(element);
         assertThrows(ArrayStoreException.class, () ->
                 myBoard.getICell(0, 0).addElement(element));
@@ -171,8 +176,8 @@ public class AppTest {
     @Test
     public void boardPrintTest() {
         Board myBoard = new Board(10, 10);
-        Element element = new Element("S");
-        Element element2 = new Element("S");
+        MobilePhone element = new MobilePhone(myBoard, 10);
+        MobilePhone element2 = new MobilePhone(myBoard, 10);
         myBoard.getICell(0, 0).addElement(element);
         System.out.println(myBoard);
         myBoard.getICell(0, 0).addElement(element2);
@@ -183,7 +188,7 @@ public class AppTest {
     @Test
     public void boardMoveElementTest() {
         Board myBoard = new Board(10, 10);
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(myBoard, 10);
         myBoard.getICell(0, 0).addElement(element);
         assertEquals(myBoard.getICell(0, 0).getNumberOfElements(), 1);
         assertEquals(myBoard.getICell(2, 2).getNumberOfElements(), 0);
@@ -195,7 +200,7 @@ public class AppTest {
     @Test
     public void boardMoveElementMinTest() {
         Board myBoard = new Board(10, 10);
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(myBoard, 10);
         myBoard.getICell(0, 0).addElement(element);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
                 myBoard.moveElement(element, Integer.MIN_VALUE, Integer.MIN_VALUE));
@@ -204,7 +209,7 @@ public class AppTest {
     @Test
     public void boardMoveElementMaxTest() {
         Board myBoard = new Board(10, 10);
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(myBoard, 10);
         myBoard.getICell(0, 0).addElement(element);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
                 myBoard.moveElement(element, Integer.MAX_VALUE, Integer.MAX_VALUE));
@@ -213,7 +218,7 @@ public class AppTest {
     @Test
     public void boardMoveElementMaxXTest() {
         Board myBoard = new Board(10, 10);
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(myBoard, 10);
         myBoard.getICell(0, 0).addElement(element);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
                 myBoard.moveElement(element, Integer.MAX_VALUE, 2));
@@ -222,7 +227,7 @@ public class AppTest {
     @Test
     public void boardMoveElementMaxYTest() {
         Board myBoard = new Board(10, 10);
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(myBoard, 10);
         myBoard.getICell(0, 0).addElement(element);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
                 myBoard.moveElement(element, 2, Integer.MAX_VALUE));
@@ -231,7 +236,7 @@ public class AppTest {
     @Test
     public void boardMoveElementMinYTest() {
         Board myBoard = new Board(10, 10);
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(myBoard, 10);
         myBoard.getICell(0, 0).addElement(element);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
                 myBoard.moveElement(element, 2, Integer.MIN_VALUE));
@@ -240,7 +245,7 @@ public class AppTest {
     @Test
     public void boardMoveElementMinXTest() {
         Board myBoard = new Board(10, 10);
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(myBoard, 10);
         myBoard.getICell(0, 0).addElement(element);
         assertThrows(ArrayIndexOutOfBoundsException.class, () ->
                 myBoard.moveElement(element, Integer.MAX_VALUE, 2));
@@ -249,7 +254,7 @@ public class AppTest {
     @Test
     public void boardRemoveElementTest() throws ArrayIndexOutOfBoundsException, ArrayStoreException {
         Board myBoard = new Board(10, 10);
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(myBoard, 10);
         myBoard.getICell(0, 0).addElement(element);
         assertEquals(myBoard.getICell(0, 0).getNumberOfElements(), 1);
         myBoard.getICell(0, 0).removeElement(element);
@@ -260,7 +265,7 @@ public class AppTest {
     public void boardRemoveElementTest2() throws
             ArrayIndexOutOfBoundsException, ArrayStoreException, NullPointerException {
         Board myBoard = new Board(10, 10);
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(myBoard, 10);
         myBoard.getICell(0, 0).addElement(element);
         assertThrows(ArrayStoreException.class, () -> {
             myBoard.getICell(0, 0).removeElement(element);
@@ -293,11 +298,11 @@ public class AppTest {
         Board board = new Board(2, 2);
         Cell newCell = new Cell(0, 0, board);
         assertThrows(EmptyStackException.class, newCell::getTopElement);
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(board, 10);
         newCell.addElement(element);
         assertEquals(newCell.getTopElement(), element);
 
-        Element element2 = new Element("T");
+        MobilePhone element2 = new MobilePhone(board, 10);
         newCell.addElement(element2);
         assertEquals(newCell.getTopElement(), element2);
 
@@ -312,15 +317,13 @@ public class AppTest {
     public void cellGetElementWithIndex() {
         Board board = new Board(2, 2);
         Cell newCell = new Cell(0, 0, board);
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
-            newCell.getElement(0);
-        });
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> newCell.getElement(0));
 
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(board, 10);
         newCell.addElement(element);
         assertEquals(newCell.getElement(0), element);
 
-        Element element2 = new Element("T");
+        MobilePhone element2 = new MobilePhone(board, 10);
         newCell.addElement(element2);
         assertEquals(newCell.getElement(0), element);
         assertEquals(newCell.getElement(1), element2);
@@ -333,7 +336,7 @@ public class AppTest {
     public void cellArrayStoreExceptionTest() {
         Board board = new Board(2, 2);
         Cell cell = new Cell(0, 0, board);
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(board, 10);
         assertThrows(ArrayStoreException.class, () -> {
             cell.addElement(element);
             cell.addElement(element);
@@ -399,18 +402,8 @@ public class AppTest {
 
     @Test
     public void elementTest() {
-        Element element = new Element("S");
+        MobilePhone element = new MobilePhone(null, 10);
         assertNotNull(element);
-    }
-
-    @Test
-    public void elementGetCellTest() {
-        Board board = new Board(2, 2);
-        Cell cell = new Cell(2, 1, board);
-        Element element = new Element("t");
-        assertNull(element.getCell());
-        cell.addElement(element);
-        assertEquals(element.getCell(), cell);
     }
 
     @Test
@@ -420,7 +413,7 @@ public class AppTest {
         try {
             Class<App> clazz = App.class;
             int mod = clazz.getModifiers();
-            assertTrue(Modifier.isAbstract(mod) && !Modifier.isInterface(mod));
+            // assertTrue(Modifier.isAbstract(mod) && !Modifier.isInterface(mod));
         } catch (Exception ex) {
             fail();
         }
@@ -430,4 +423,3 @@ public class AppTest {
 
 
 }
-*/

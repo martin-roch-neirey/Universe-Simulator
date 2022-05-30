@@ -1,12 +1,10 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
-import ch.heia.isc.gl1.simulife.interface_.IElement;
+import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
@@ -17,14 +15,14 @@ import java.util.Map;
  * @brief MobileAntenna object
  */
 
-public class MobileAntenna extends Element implements IElement {
+public class MobileAntenna extends Element {
 
     @Setter
     @Getter
     private int coverageRadius;
 
-    public MobileAntenna(int coverageRadius) {
-        super();
+    public MobileAntenna(IControllableUniverse universe, int coverageRadius) {
+        super(universe);
         this.coverageRadius = coverageRadius;
     }
 
@@ -35,20 +33,6 @@ public class MobileAntenna extends Element implements IElement {
         // or go near covered mobile phones
     }
 
-    @Override
-    public char getCode() {
-        return 0;
-    }
-
-    @Override
-    public Color getColor() {
-        return null;
-    }
-
-    @Override
-    public String getIconPath() {
-        return null;
-    }
 
     private void getNearestAntenna() {
         // TODO

@@ -1,5 +1,6 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
+import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
 import ch.heia.isc.gl1.simulife.interface_.IPositionnableElement;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,13 +23,21 @@ public abstract class Element implements IPositionnableElement {
 
     protected Map<String, String> state;
 
+    @Getter
     protected int xLoc;
+
+    @Getter
     protected int yLoc;
+
+    @Getter
+    @Setter
+    protected IControllableUniverse universe;
 
     /**
      * @brief constructor with only type
      */
-    public Element() {
+    public Element(IControllableUniverse universe) {
+        this.universe = universe;
         state = new HashMap<>();
     }
 
@@ -55,6 +64,19 @@ public abstract class Element implements IPositionnableElement {
         return 0;
     }
 
+    /**
+     * Returns a map of the state of the object.
+     * This map is a copy of the state map, so if we modify values on the real map, the copy
+     * won't be changed.
+     *
+     * This method is possibly override in children class.
+     *
+     * @values :
+     * - xLoc : x location
+     * - yLox : y location
+     *
+     * @return A copy of the map.
+     */
     @Override
     public Map<String, String> getState() {
         Map<String, String> map = new HashMap<>(state);
@@ -63,22 +85,15 @@ public abstract class Element implements IPositionnableElement {
         return map;
     }
 
+    /**
+     * Sets the x and y coordinates of the object.
+     *
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     */
     @Override
-    public void action() {
-
-    }
-
     public void setPosition(int x, int y) {
         this.xLoc = x;
         this.yLoc = y;
     }
-
-    public int getxLoc() {
-        return Integer.parseInt(this.state.getOrDefault("xLoc", null));
-    }
-
-    public int getyLoc() {
-        return Integer.parseInt(this.state.getOrDefault("yLoc", null));
-    }
-
 }
