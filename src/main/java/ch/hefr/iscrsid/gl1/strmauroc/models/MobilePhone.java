@@ -21,6 +21,9 @@ public class MobilePhone extends Element {
     @Getter
     private int energy;
 
+    @Getter
+    private MobileAntenna nearestAntenna;
+
     /**
      * @brief mobile phone constructor
      */
@@ -36,30 +39,64 @@ public class MobilePhone extends Element {
     @Override
     public void action() {
         this.setEnergy(this.energy - 1);
+        System.out.println("energy="+energy );
+
+        // has the phone enough energy to live ?
         if (this.energy <= 0) {
             this.getUniverse().removeElement(this);
             this.universe = null;
-            // System.out.println("Phone delete");
+            System.out.println("phone deleted");
+            return;
         }
 
-        double distance = Double.parseDouble(this.getState().getOrDefault("nearestAntenna", String.valueOf(Integer.MAX_VALUE)));
+        // looking for a new nearest antenna
+        double distance = Integer.MAX_VALUE;
 
-
-        /* Code disabled to allow execution
         for (MobileAntenna antenna : this.getAntennas()) {
 
-            int xAntenna = this.getxLoc();
-            int yAntenna = this.getyLoc();
+            int xAntenna = antenna.getXLoc();
+            int yAntenna = antenna.getYLoc();
 
             double newDistance = Math.sqrt((yAntenna - yLoc) ^ 2 + (xAntenna - xLoc) ^ 2);
 
-            if (newDistance < distance) {
+            if (newDistance < distance) { // found a new nearest Antenna
                 distance = newDistance;
-                System.out.println("Discovered a new nearest Antenna");
+                this.nearestAntenna = antenna;
+                this.state.put("nearestAntenna", String.valueOf(distance));
+                System.out.println("new nearest");
             }
         }
 
-        this.getState().put("nearestAntenna", String.valueOf(distance));*/
+        this.getState().put("nearestAntenna", String.valueOf(distance));
+
+        // move to nearest Antenna :
+        if (this.nearestAntenna != null) {
+
+            int xDest = nearestAntenna.getXLoc();
+            int yDest = nearestAntenna.getYLoc();
+
+            if (nearestAntenna.getUniverse().getICell(nearestAntenna.getXLoc(), nearestAntenna.getYLoc()) ==
+                    this.getUniverse().getICell(this.getXLoc(), this.getYLoc())) return;
+
+            boolean xRight = false;
+            boolean yDown = false;
+
+            if (xDest > this.getXLoc()) xRight = true;
+            if (yDest > this.getYLoc()) yDown = true;
+
+            if (xRight && this.getXLoc() < this.getUniverse().getWidth()) {
+                this.getUniverse().moveElement(this, this.getXLoc() + 1, this.getYLoc());
+            } else {
+                this.getUniverse().moveElement(this, this.getXLoc() - 1, this.getYLoc());
+            }
+            if (yDown && this.getYLoc() < this.getUniverse().getHeight()) {
+                this.getUniverse().moveElement(this, this.getXLoc(), this.getYLoc() + 1);
+            } else {
+                this.getUniverse().moveElement(this, this.getXLoc(), this.getYLoc() - 1);
+            }
+
+        }
+
 
     }
 
@@ -87,9 +124,13 @@ public class MobilePhone extends Element {
      * @return A list of all the MobileAntenna objects in the universe of the mobile phone.
      */
     private ArrayList<MobileAntenna> getAntennas() {
+        System.out.println("function called");
         ArrayList<MobileAntenna> list = new ArrayList<>();
         Board.forEachElementOfUniverse(this.universe, e -> {
-            if (e instanceof MobileAntenna) list.add((MobileAntenna) e);
+            if (e instanceof MobileAntenna) {
+                list.add((MobileAntenna) e);
+                System.out.println("added Antenna");
+            }
         });
         return list;
     }

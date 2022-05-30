@@ -406,7 +406,7 @@ public class AppTest {
         assertNotNull(element);
     }
 
-    @Test
+/*    @Test
     public void appTest() {
         // no parameter needed
         App.main(null);
@@ -419,7 +419,7 @@ public class AppTest {
         }
 
 
-    }
+    }*/
 
 
 }

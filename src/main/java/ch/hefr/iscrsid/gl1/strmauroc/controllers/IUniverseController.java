@@ -5,7 +5,6 @@ import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
 
 public class IUniverseController {
 
-
     /**
      * Call action() method on all elements in the universe
      */

@@ -78,7 +78,6 @@ public class Board implements IControllableUniverse {
         if (this.getAllElements().contains(element)) {
             this.removeElement(element);
             this.addElement(element, x, y);
-            System.out.println("yes");
         }
 
     }
