@@ -23,19 +23,20 @@ public abstract class App {
         System.out.println();
         System.out.println("-----------------ADD-----------------");
         MobileAntenna antenna1 = new MobileAntenna(myBoard, 4);
-        // MobileAntenna antenna2 = new MobileAntenna(myBoard, 4);
+        MobileAntenna antenna2 = new MobileAntenna(myBoard, 4);
         MobilePhone phone = new MobilePhone(myBoard, 10);
         MobilePhone phone2 = new MobilePhone(myBoard, 10);
-        myBoard.addElement(antenna1, 7, 7);
-        myBoard.addElement(phone, 4, 4);
-        myBoard.addElement(phone2, 0, 0);
+        myBoard.addElement(antenna1, 7, 9);
+        myBoard.addElement(phone, 4, 1);
+        myBoard.addElement(phone2, 6, 7);
+        myBoard.addElement(antenna2, 2, 3);
 
         System.out.println(myBoard);
 
         System.out.println("-----------------START-----------------");
 
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 2; i++) {
             System.out.println("time unit = " + i);
             IUniverseController.actionAll(myBoard);
             System.out.println(myBoard);

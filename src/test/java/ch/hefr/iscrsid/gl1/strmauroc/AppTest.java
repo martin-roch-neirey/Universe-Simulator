@@ -406,8 +406,8 @@ public class AppTest {
         assertNotNull(element);
     }
 
-/*    @Test
-    public void appTest() {
+    @Test
+    public void appTest() throws InterruptedException {
         // no parameter needed
         App.main(null);
         try {
@@ -419,7 +419,7 @@ public class AppTest {
         }
 
 
-    }*/
+    }
 
 
 }

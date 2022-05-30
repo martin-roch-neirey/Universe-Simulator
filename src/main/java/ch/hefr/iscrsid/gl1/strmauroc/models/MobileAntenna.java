@@ -83,10 +83,7 @@ public class MobileAntenna extends Element {
             } else if (this.getYLoc() > 0 && !yDown) {
                 this.getUniverse().moveElement(this, this.getXLoc(), this.getYLoc() - 1);
             }
-
         }
-
-
     }
 
     /**
