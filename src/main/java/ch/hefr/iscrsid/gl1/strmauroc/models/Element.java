@@ -1,5 +1,15 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
+import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
+import ch.heia.isc.gl1.simulife.interface_.IPositionnableElement;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
  * @author Maumary Quentin <quentin.maumary@edu.hefr.ch>
@@ -10,32 +20,34 @@ package ch.hefr.iscrsid.gl1.strmauroc.models;
  */
 
 
-public class Element {
+public abstract class Element implements IPositionnableElement {
 
-    private final String type;
-    private Cell cell;
+    protected Map<String, String> state;
+
+    @Getter
+    protected int xLoc;
+
+    @Getter
+    protected int yLoc;
+
+    @Getter
+    protected MobileAntenna nearestAntenna;
+
+    protected char code;
+    protected Color color;
+
+    @Getter
+    @Setter
+    protected IControllableUniverse universe;
 
     /**
-     * @param type type of the element
      * @brief constructor with only type
      */
-    public Element(String type) {
-        this.type = type;
-    }
-
-    /**
-     * @param cell cell instance
-     * @brief set cell to element
-     */
-    void setCell(Cell cell) {
-        this.cell = cell;
-    }
-
-    /**
-     * @return Cell
-     */
-    public Cell getCell() {
-        return this.cell;
+    public Element(IControllableUniverse universe, char code, Color color) {
+        this.universe = universe;
+        this.code = code;
+        this.color = color;
+        state = new HashMap<>();
     }
 
     /**
@@ -43,6 +55,78 @@ public class Element {
      */
     @Override
     public String toString() {
-        return "type:" + type + " cell:" + " " + cell;
+        return "type:" + " position:" + " " + xLoc + ":" + yLoc;
     }
+
+    /**
+     * @return path of the icon
+     */
+    @Override
+    public String getIconPath() {
+        return null;
+    }
+
+    /**
+     * @return color of the element
+     */
+    @Override
+    public Color getColor() {
+        return this.color;
+    }
+
+    /**
+     * @return code of the element
+     */
+    @Override
+    public char getCode() {
+        return this.code;
+    }
+
+    /**
+     * Returns a map of the state of the object.
+     * This map is a copy of the state map, so if we modify values on the real map, the copy
+     * won't be changed.
+     *
+     * This method is possibly override in children class.
+     *
+     * @values :
+     * - xLoc : x location
+     * - yLox : y location
+     * - nearestAntenna : the nearestAntenna from the actual object
+     *
+     * @return A copy of the map.
+     */
+    @Override
+    public Map<String, String> getState() {
+        Map<String, String> map = new HashMap<>(state);
+        map.put("xLoc", String.valueOf(xLoc));
+        map.put("yLoc", String.valueOf(yLoc));
+        return map;
+    }
+
+    /**
+     * Sets the x and y coordinates of the object.
+     *
+     * @param x The x coordinate.
+     * @param y The y coordinate.
+     */
+    @Override
+    public void setPosition(int x, int y) {
+        this.xLoc = x;
+        this.yLoc = y;
+    }
+
+    /**
+     * @return A list of all the MobileAntenna objects in the universe of the mobile phone.
+     */
+    protected ArrayList<MobileAntenna> getAntennas() {
+        ArrayList<MobileAntenna> list = new ArrayList<>();
+        Board.forEachElementOfUniverse(this.universe, e -> {
+            if (e instanceof MobileAntenna) {
+                list.add((MobileAntenna) e);
+            }
+        });
+        return list;
+    }
+
 }

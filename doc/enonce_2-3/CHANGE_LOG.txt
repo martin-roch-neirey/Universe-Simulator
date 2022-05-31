@@ -1,0 +1,11 @@
+---------------------
+BOARD REWORK :
+- Il est désormais possible de créer une Board en forme de rectangle
+- Nouveaux tests unitaires
+- Changement du système d'affichage pour correspondre au nouveau type de Board
+
+---------------------
+DIAGRAMS :
+- Use case modifié : suppression du "dessin de l'univers" et ajout des mobileAntennas et mobilePhones
+- Fiches descriptives modifiées par rapport aux modifications apportées aux Use Case
+- Nouveaux diagrammes : diagrammes de séquences pour les mobilePhone et mobileAntenna, et diagramme de classe

@@ -1,22 +1,30 @@
 package ch.hefr.iscrsid.gl1.strmauroc.models;
 
 
-import java.util.ArrayList;
+import ch.heia.isc.gl1.simulife.interface_.*;
+import lombok.Getter;
+
+import java.util.EmptyStackException;
+import java.util.Stack;
 
 /**
  * @author Philipp Streit <philipp.streit@edu.hefr.ch>
  * @author Maumary Quentin <quentin.maumary@edu.hefr.ch>
  * @author Roch-Neirey Martin <martin.roch-neirey@edu.hefr.ch>
- * @version 1.0
- * @date 05.04.2022
- * @brief Cell with elements
+ * @version 2.0
+ * @date 26.04.2022
+ * @brief It's a cell in a universe that can contain elements
  */
 
-public class Cell {
-
+public class Cell implements ICell {
+    @Getter
     private final int x;
+
+    @Getter
     private final int y;
-    private final ArrayList<Element> elements;
+    private final Stack<IElement> elements;
+
+    private final IControllableUniverse universe;
 
     /**
      * @param x x coord
@@ -24,25 +32,27 @@ public class Cell {
      * @throws NumberFormatException exception
      * @brief Constructor of Cell with Exception handler
      */
-    public Cell(int x, int y) throws IllegalArgumentException {
+
+    public Cell(int x, int y, IControllableUniverse universe) throws IllegalArgumentException {
         if (x < 0 || y < 0) {
             throw new IllegalArgumentException("Illegal Args: x: " + x + " y: " + y);
         }
-        this.elements = new ArrayList<>();
+        this.elements = new Stack<>();
         this.x = x;
         this.y = y;
+        this.universe = universe;
     }
 
     /**
      * @param element element instance
      * @brief Add element in Cell
      */
-    public void addElement(Element element) throws ArrayStoreException {
+    public void addElement(IPositionnableElement element) throws ArrayStoreException {
         if (this.elements.contains(element)) {
             throw new ArrayStoreException("Element: " + element + " already exist in array");
         } else {
-            this.elements.add(element);
-            element.setCell(this);
+            this.elements.push(element);
+            element.setPosition(this.x, this.y);
         }
     }
 
@@ -52,15 +62,12 @@ public class Cell {
      * @throws ArrayStoreException exception
      * @brief remove element
      */
-    public void removeElement(Element element) throws ArrayStoreException {
+    public void removeElement(IElement element) throws ArrayStoreException {
         if (this.elements.contains(element)) {
             this.elements.remove(element);
-            element.setCell(null);
         } else {
             throw new ArrayStoreException("Element: " + element + " dont exist in array");
         }
-
-
     }
 
     /**
@@ -71,24 +78,45 @@ public class Cell {
         return "x:" + x + " y:" + y;
     }
 
+
     /**
-     * @return x
+     * This function returns the universe that this object is in.
+     *
+     * @return The universe.
      */
-    public int getX() {
-        return x;
+    @Override
+    public IUniverse getIUniverse() {
+        return this.universe;
     }
 
     /**
-     * @return y
+     * Returns the top element of the stack.
+     *
+     * @return The top element of the stack.
      */
-    public int getY() {
-        return y;
+    @Override
+    public IElement getTopElement() throws EmptyStackException {
+        return this.elements.peek();
     }
 
     /**
-     * @return size of elements
+     * Returns the element at the specified index.
+     *
+     * @param i The index of the element to get.
+     * @return The element at the given index.
      */
-    public int size() {
+    @Override
+    public IElement getElement(int i) throws ArrayIndexOutOfBoundsException {
+        return elements.get(i);
+    }
+
+    /**
+     * Returns the number of elements in the list.
+     *
+     * @return The number of elements in the list.
+     */
+    @Override
+    public int getNumberOfElements() {
         return this.elements.size();
     }
 }
