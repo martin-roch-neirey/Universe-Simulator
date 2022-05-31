@@ -2,7 +2,6 @@ package ch.hefr.iscrsid.gl1.strmauroc;
 
 import ch.hefr.iscrsid.gl1.strmauroc.controllers.IUniverseController;
 import ch.hefr.iscrsid.gl1.strmauroc.models.*;
-import ch.heia.isc.gl1.simulife.interface_.IControllableUniverse;
 
 import java.util.concurrent.TimeUnit;
 
@@ -36,7 +35,7 @@ public abstract class App {
         System.out.println("-----------------START-----------------");
 
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 15; i++) {
             System.out.println("time unit = " + i);
             IUniverseController.actionAll(myBoard);
             System.out.println(myBoard);

@@ -18,8 +18,6 @@ import java.util.function.Consumer;
 public class Board implements IControllableUniverse {
 
     private final Cell[][] cellBoard;
-    private final int width;
-    private final int height;
 
     /**
      * @param width width of the board
@@ -28,9 +26,6 @@ public class Board implements IControllableUniverse {
      * @brief Constructor of Board with Exception handler
      */
     public Board(int width, int height) throws IllegalArgumentException {
-
-        this.width = width;
-        this.height = height;
 
         if (width < 0 || height < 0) {
             throw new IllegalArgumentException("Negative size. Width was: " + width + " Height was: " + height);
@@ -131,7 +126,7 @@ public class Board implements IControllableUniverse {
      */
     @Override
     public int getWidth() {
-        return this.width;
+        return this.cellBoard.length;
     }
 
     /**
@@ -141,7 +136,7 @@ public class Board implements IControllableUniverse {
      */
     @Override
     public int getHeight() {
-        return this.height;
+        return this.cellBoard[0].length;
     }
 
     /**
